@@ -1,0 +1,28 @@
+{
+  "volume": [
+    { "key": "tsp", "label": "Teaspoon (US)", "to_ml": 4.92892159 },
+    { "key": "tbsp", "label": "Tablespoon (US)", "to_ml": 14.7867648 },
+    { "key": "cup", "label": "Cup (US)", "to_ml": 236.5882365 },
+    { "key": "ml", "label": "Milliliter", "to_ml": 1 },
+    { "key": "liter", "label": "Liter", "to_ml": 1000 }
+  ],
+  "mass": [
+    { "key": "g", "label": "Gram", "to_g": 1 },
+    { "key": "kg", "label": "Kilogram", "to_g": 1000 },
+    { "key": "oz", "label": "Ounce", "to_g": 28.349523125 },
+    { "key": "lb", "label": "Pound", "to_g": 453.59237 }
+  ],
+  "aliases": {
+    "l": "liter",
+    "litre": "liter",
+    "grams": "g",
+    "gram": "g",
+    "kilogram": "kg",
+    "kilograms": "kg",
+    "tablespoon": "tbsp",
+    "tablespoons": "tbsp",
+    "teaspoon": "tsp",
+    "teaspoons": "tsp",
+    "cups": "cup"
+  }
+}
