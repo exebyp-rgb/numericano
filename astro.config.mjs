@@ -6,7 +6,7 @@ export default defineConfig({
   // output: "static",
 
   // Если у вас есть кастомный домен numericano.com — можно задать site (не обязательно для деплоя):
-  // site: "https://numericano.com",
+/ site: "https://numericano.com",
 
   integrations: []
 });
