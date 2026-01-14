@@ -1,21 +1,19 @@
 {
-  "name": "magenta-moon",
+  "name": "numericano",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/rss": "^4.0.14",
-    "@astrojs/sitemap": "^3.6.1",
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.9",
-    "sharp": "^0.34.3",
-    "tailwindcss": "^4.1.18",
-        "@tailwindcss/typography": "^0.5.10",
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^4.1.18"
   }
 }
