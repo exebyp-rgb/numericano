@@ -1,34 +1,66 @@
 ---
 import { canonicalUrl } from "../lib/seo";
 
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
 const {
-  title = "Numericano",
+  title,
   description = "Convert units and ingredient quantities with clear assumptions.",
+  ogImage = "/og-image.png",
 } = Astro.props;
 
 const canonical = canonicalUrl(Astro.url.pathname);
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.url)} />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.url)} />
   </head>
   <body class="min-h-screen bg-white text-slate-900">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
     <header class="border-b">
       <div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between gap-4">
         <a href="/" class="font-semibold tracking-tight text-lg">Numericano</a>
         <nav class="flex items-center gap-4 text-sm">
-          <a class="hover:underline" href="/cooking/">Cooking</a>
-          <a class="hover:underline" href="/volume-weight/">Volume↔Weight</a>
+          <a class="hover:underline" href="/cooking">Cooking</a>
+          <a class="hover:underline" href="/volume-weight">Volume⇄Weight</a>
         </nav>
       </div>
     </header>
-    <main class="mx-auto max-w-5xl px-4 py-8">
+    
+    <main id="main" class="mx-auto max-w-5xl px-4 py-8">
       <slot />
     </main>
+    
+    <footer class="border-t mt-16">
+      <div class="mx-auto max-w-5xl px-4 py-8">
+        <div class="prose prose-slate max-w-none">
+          <p class="text-sm text-slate-600">© {new Date().getFullYear()} Numericano. Converting units clearly.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
