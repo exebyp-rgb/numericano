@@ -3,43 +3,41 @@ const quick = [
   { label: "Water (baseline)", href: "/ingredients/water/" },
   { label: "Sugar", href: "/ingredients/sugar/" },
   { label: "Flour", href: "/ingredients/flour/" },
-  { label: "Cooking hub", href: "/conversions/" },
-  { label: "Volume ↔ Weight hub", href: "/volume-weight/" }
+  { label: "Conversions", href: "/conversions/" },
+  { label: "Volume ↔ Weight", href: "/volume-weight/" }
 ];
 
 const tips = [
   "Every conversion ties to an explicit assumption (density, packing, temperature).",
-    'If your measurement is "heaping" or "sifted", choose the closest variant.',
+  "If your measurement is 'heaping' or 'sifted', choose the closest variant.",
   "When in doubt: weigh it once, then reuse your own baseline."
 ];
 ---
-<aside class="space-y-4">
-  <div class="panel overflow-hidden">
-    <div class="h-1.5 rainbow-line"></div>
-    <div class="p-4">
-      <p class="text-xs font-semibold uppercase tracking-wider text-white/60">Quick paths</p>
-      <ul class="mt-3 space-y-1">
-        {quick.map((q) => (
-          <li>
-            <a
-              href={q.href}
-              class="block rounded-xl px-3 py-2 text-sm text-white/75 hover:bg-white/5 hover:text-white"
-            >
-              {q.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
+
+<aside class="space-y-6">
+  <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500">Quick paths</h3>
+    <ul class="mt-3 space-y-1">
+      {quick.map((q) => (
+        <li>
+          <a
+            href={q.href}
+            class="block rounded px-2 py-1.5 text-sm text-slate-700 hover:bg-white hover:text-blue-600"
+          >
+            {q.label}
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
 
-  <div class="panel-soft p-4">
-    <p class="text-xs font-semibold uppercase tracking-wider text-white/60">Assumptions</p>
-    <ul class="mt-3 space-y-2 text-sm text-white/70">
-      {tips.map((t) => (
+  <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500">Assumptions</h3>
+    <ul class="mt-3 space-y-2 text-sm text-slate-600">
+      {tips.map((tip) => (
         <li class="flex gap-2">
-          <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-white/40"></span>
-          <span>{t}</span>
+          <span class="mt-1.5 h-1 w-1 flex-none rounded-full bg-slate-400"></span>
+          <span>{tip}</span>
         </li>
       ))}
     </ul>
