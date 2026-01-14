@@ -11,6 +11,7 @@ const {
 
 const year = new Date().getFullYear();
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,46 +20,31 @@ const year = new Date().getFullYear();
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
-  <body class="min-h-screen bg-[#07040d]">
-    <!-- Background glow -->
-    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
-      <div class="absolute inset-0 bg-[#07040d]"></div>
-      <div class="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-pink-500/20 blur-[110px]"></div>
-      <div class="absolute top-24 right-[-120px] h-[560px] w-[560px] rounded-full bg-cyan-400/12 blur-[110px]"></div>
-      <div class="absolute bottom-[-180px] left-[-120px] h-[520px] w-[520px] rounded-full bg-purple-500/18 blur-[110px]"></div>
-      <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60"></div>
-    </div>
-
-    <a
-      href="#content"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:border-white/15 focus:bg-[#07040d] focus:px-4 focus:py-2 focus:text-sm focus:text-white"
-    >
-      Skip to content
-    </a>
+  <body class="bg-white text-slate-900">
+    <a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:border-slate-300 focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:shadow-lg">Skip to content</a>
 
     <Header />
 
-    <main class="mx-auto w-full max-w-6xl px-4 py-8">
-      <div class={noSidebar ? "grid grid-cols-1 gap-6" : "grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]"}>
-        <section id="content" class="panel p-5 sm:p-8">
-          <div class="h-1.5 rainbow-line -mx-5 -mt-5 mb-6 sm:-mx-8 sm:-mt-8"></div>
-
-          <article class="prose-dark">
-            <slot />
-          </article>
-
-          <div class="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-white/60">
-            <span>Numericano prioritizes clarity: each conversion is tied to an explicit assumption (density, packing, temperature).</span>
-            <span>© {year} Numericano</span>
-          </div>
+    <main id="content" class="mx-auto w-full max-w-6xl px-4 py-8">
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
+        <section class="prose prose-slate max-w-none">
+          <slot />
         </section>
-
         {!noSidebar && (
-          <div class="lg:pt-0">
+          <div>
             <Sidebar />
           </div>
         )}
       </div>
     </main>
+
+    <footer class="border-t border-slate-200">
+      <div class="mx-auto max-w-6xl px-4 py-6 text-sm text-slate-600">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <span>Numericano prioritizes clarity: each conversion is tied to an explicit assumption (density, packing, temperature).</span>
+          <span>© {year} Numericano</span>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
