@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ingredients from "../../data/data/ingredients.json";
+import type { Ingredient } from "../../types";
+import { buildTitle, buildDescription } from "../../lib/seo";
+
+const ING = ingredients as Ingredient[];
+const title = buildTitle(["Cooking conversions"]);
+const description = buildDescription("Cooking unit conversions by ingredient: cups, tablespoons, teaspoons to grams and ounces using typical densities.");
+---
+<BaseLayout title={title} description={description}>
+  <h1 class="text-3xl font-semibold tracking-tight">Cooking conversions</h1>
+  <p class="mt-2 text-slate-700 max-w-2xl">
+    Choose an ingredient to see typical densities and conversions (volume ↔ mass).
+  </p>
+
+  <ul class="mt-6 grid gap-2 sm:grid-cols-2">
+    {ING.map(i => (
+      <li>
+        <a class="block rounded-lg border px-4 py-3 hover:bg-slate-50" href={`/ingredients/${i.slug}/`}>
+          <div class="font-medium">{i.name}</div>
+          <div class="text-xs text-slate-600">{i.notes}</div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
