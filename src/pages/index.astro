@@ -1,42 +1,35 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ingredients from "../data/data/ingredients.json";
+import ingredients from "../data/data-ingredients.json";
 import type { Ingredient } from "../types";
 import { buildTitle, buildDescription } from "../lib/seo";
 
 const ING = ingredients as Ingredient[];
 const title = buildTitle(["Unit conversions", "volume ↔ weight", "ingredient densities"]);
-const description = buildDescription("Numericano helps you convert cooking volumes to weights using clear density assumptions. Explore ingredient pages and common conversion pairs.");
+const description = buildDescription("Numericano helps you convert cooking volumes to weights using clear density assumptions. Explore ingredient pages or run conversions directly.");
 const top = ING.slice(0, 10);
 ---
 <BaseLayout title={title} description={description}>
-  <h1 class="text-4xl font-semibold tracking-tight">Numericano</h1>
-  <p class="mt-3 text-slate-700 max-w-2xl">
-    Practical unit conversions with explicit assumptions. Start with cooking volume ↔ weight using typical ingredient densities.
-  </p>
+  <h1>Numericano</h1>
+  <p>Practical unit conversions with explicit assumptions. Start with cooking volume ↔ weight using typical ingredient densities.</p>
 
-  <div class="mt-8 grid gap-4 sm:grid-cols-2">
-    <a class="rounded-xl border p-5 hover:bg-slate-50" href="/cooking/">
-      <div class="text-lg font-semibold">Cooking conversions</div>
-      <div class="mt-1 text-sm text-slate-600">Cups, tbsp, tsp ↔ grams, ounces, pounds (by ingredient)</div>
-    </a>
-    <a class="rounded-xl border p-5 hover:bg-slate-50" href="/volume-weight/">
-      <div class="text-lg font-semibold">Volume ↔ Weight</div>
-      <div class="mt-1 text-sm text-slate-600">mL/L ↔ g/kg with density assumptions</div>
-    </a>
-  </div>
+  <h2>Cooking conversions</h2>
+  <p>Cups, tbsp, tsp → grams, ounces, pounds (by ingredient)</p>
+  <ul>
+    <li><a href="/conversions/">Volume ↔ Weight</a></li>
+    <li><a href="/volume-weight/">mL/L ↔ g/kg with density assumptions</a></li>
+  </ul>
 
-  <h2 class="mt-10 text-2xl font-semibold tracking-tight">Ingredients</h2>
-  <p class="mt-2 text-sm text-slate-600">Typical densities and variants. More coming soon.</p>
-
-  <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+  <h2>Ingredients</h2>
+  <p>Typical densities and variants. More coming soon.</p>
+  <ul>
     {top.map(i => (
       <li>
-        <a class="block rounded-lg border px-4 py-3 hover:bg-slate-50" href={`/ingredients/${i.slug}/`}>
-          <div class="font-medium">{i.name}</div>
-          <div class="text-xs text-slate-600">{i.notes}</div>
-        </a>
+        <a href={`/ingredients/${i.slug}/`}>{i.name}</a>
+        <br />
+        <small>{i.density_variants_info || "Density varies by type and packing."}</small>
       </li>
     ))}
   </ul>
+  <p><a href="/ingredients/">Browse all ingredients</a></p>
 </BaseLayout>
