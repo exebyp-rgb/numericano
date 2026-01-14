@@ -1,0 +1,8 @@
+[
+  { "from": "cup", "to": "g" },
+  { "from": "cup", "to": "oz" },
+  { "from": "tbsp", "to": "g" },
+  { "from": "tbsp", "to": "oz" },
+  { "from": "tsp", "to": "g" },
+  { "from": "tsp", "to": "oz" }
+]
