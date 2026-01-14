@@ -1,0 +1,22 @@
+[
+  {"from": "tsp", "to": "tbsp"},
+  {"from": "tsp", "to": "cup"},
+  {"from": "tsp", "to": "g"},
+  {"from": "tsp", "to": "oz"},
+  {"from": "tbsp", "to": "tsp"},
+  {"from": "tbsp", "to": "cup"},
+  {"from": "tbsp", "to": "g"},
+  {"from": "tbsp", "to": "oz"},
+  {"from": "cup", "to": "tsp"},
+  {"from": "cup", "to": "tbsp"},
+  {"from": "cup", "to": "g"},
+  {"from": "cup", "to": "oz"},
+  {"from": "g", "to": "tsp"},
+  {"from": "g", "to": "tbsp"},
+  {"from": "g", "to": "cup"},
+  {"from": "g", "to": "oz"},
+  {"from": "oz", "to": "tsp"},
+  {"from": "oz", "to": "tbsp"},
+  {"from": "oz", "to": "cup"},
+  {"from": "oz", "to": "g"}
+]
