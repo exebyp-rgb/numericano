@@ -1,37 +1,35 @@
 ---
 const nav = [
-  { label: "Cooking conversions", href: "/conversions/" },
+  { label: "Conversions", href: "/conversions/" },
   { label: "Volume ↔ Weight", href: "/volume-weight/" },
   { label: "Ingredients", href: "/ingredients/" }
 ];
 ---
-<header class="sticky top-0 z-50 border-b border-white/10 bg-[#07040d]/60 backdrop-blur-xl">
+
+<header class="border-b border-slate-200">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-    <a href="/" class="group inline-flex items-center gap-2">
-      <span class="relative inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_25px_rgba(0,0,0,0.35)]">
-        <span class="absolute inset-0 rounded-2xl opacity-70 rainbow-line"></span>
-        <span class="relative font-black tracking-tight text-[#07040d]">N</span>
-      </span>
-      <span class="leading-tight">
-        <span class="block text-sm font-semibold tracking-wide text-white/90">Numericano</span>
-        <span class="block text-[11px] text-white/55">cooking volume ↔ weight</span>
-      </span>
+    <a href="/" class="text-lg font-semibold text-slate-900 hover:text-blue-600">
+      Numericano
     </a>
 
-    <nav class="hidden items-center gap-2 md:flex">
+    <nav class="hidden items-center gap-6 md:flex">
       {nav.map((i) => (
         <a
           href={i.href}
-          class="rounded-full border border-transparent px-3 py-2 text-sm text-white/70 hover:border-white/10 hover:bg-white/5 hover:text-white/90"
+          class="text-sm text-slate-600 hover:text-blue-600"
         >
           {i.label}
         </a>
       ))}
-      <a class="btn-outline ml-2" href="/ingredients/">Browse</a>
+      <a class="rounded border border-blue-600 px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-50" href="/ingredients/">
+        Browse
+      </a>
     </nav>
 
     <div class="flex items-center gap-2 md:hidden">
-      <a class="btn-outline" href="/ingredients/">Menu</a>
+      <a class="rounded border border-blue-600 px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-50" href="/ingredients/">
+        Menu
+      </a>
     </div>
   </div>
 </header>
