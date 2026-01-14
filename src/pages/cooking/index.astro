@@ -1,27 +1,46 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import ingredients from "../../data/data/ingredients.json";
-import type { Ingredient } from "../../types";
-import { buildTitle, buildDescription } from "../../lib/seo";
+import ingredients from "../../../data/ingredients.json";
+import pairs from "../../../data/cookingPairs.json";
+
+type Ingredient = { slug: string; name: string };
+type Pair = { from: string; to: string };
 
 const ING = ingredients as Ingredient[];
-const title = buildTitle(["Cooking conversions"]);
-const description = buildDescription("Cooking unit conversions by ingredient: cups, tablespoons, teaspoons to grams and ounces using typical densities.");
+const PAIRS = pairs as Pair[];
 ---
-<BaseLayout title={title} description={description}>
-  <h1 class="text-3xl font-semibold tracking-tight">Cooking conversions</h1>
-  <p class="mt-2 text-slate-700 max-w-2xl">
-    Choose an ingredient to see typical densities and conversions (volume ↔ mass).
-  </p>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cooking conversions (cups/tbsp/tsp to grams/ounces) — Numericano</title>
+    <meta name="description" content="Ingredient-based cooking conversions with explicit density assumptions." />
+    <link rel="canonical" href="/cooking/" />
+  </head>
+  <body>
+    <p><a href="/">Numericano</a></p>
+    <h1>Cooking conversions</h1>
+    <p>Select an ingredient and a conversion pair.</p>
 
-  <ul class="mt-6 grid gap-2 sm:grid-cols-2">
-    {ING.map(i => (
-      <li>
-        <a class="block rounded-lg border px-4 py-3 hover:bg-slate-50" href={`/ingredients/${i.slug}/`}>
-          <div class="font-medium">{i.name}</div>
-          <div class="text-xs text-slate-600">{i.notes}</div>
-        </a>
-      </li>
-    ))}
-  </ul>
-</BaseLayout>
+    <h2>Ingredients</h2>
+    <ul>
+      {ING.map(i => (
+        <li><a href={`/ingredients/${i.slug}/`}>{i.name}</a></li>
+      ))}
+    </ul>
+
+    <h2>Popular conversions</h2>
+    <ul>
+      {ING.slice(0, 10).map(i => (
+        <li>
+          <a href={`/cooking/${i.slug}/cup-to-g/`}>1 cup {i.name} in g</a> ·
+          <a href={`/cooking/${i.slug}/cup-to-oz/`}>1 cup {i.name} in oz</a>
+        </li>
+      ))}
+    </ul>
+
+    <h2>All pairs</h2>
+    <ul>
+      {PAIRS.map(p => <li>{p.from} → {p.to}</li>)}
+    </ul>
+  </body>
+</html>
