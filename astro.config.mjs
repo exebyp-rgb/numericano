@@ -1,17 +1,12 @@
-// @ts-check
+// astro.config.mjs
+import { defineConfig } from "astro/config";
 
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import { defineConfig } from 'astro/config';
-
-import tailwindcss from '@tailwindcss/vite';
-
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
-  integrations: [mdx(), sitemap()],
+  // Для Cloudflare Pages обычно auto; можно явно указать при желании:
+  // output: "static",
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  // Если у вас есть кастомный домен numericano.com — можно задать site (не обязательно для деплоя):
+  // site: "https://numericano.com",
+
+  integrations: []
 });
