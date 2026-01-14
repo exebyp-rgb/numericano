@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buildTitle, buildDescription } from "../../lib/seo";
+
+const title = buildTitle(["Volume ↔ Weight"]);
+const description = buildDescription("Convert volume to weight using density assumptions. Start with cooking ingredients, then expand to materials and lab use-cases.");
+---
+<BaseLayout title={title} description={description}>
+  <h1 class="text-3xl font-semibold tracking-tight">Volume ↔ Weight</h1>
+  <p class="mt-2 text-slate-700 max-w-2xl">
+    Volume-to-weight depends on density. Use ingredient pages for typical cooking densities.
+  </p>
+
+  <div class="mt-6 rounded-xl border p-5">
+    <div class="text-sm text-slate-600">Quick start</div>
+    <ul class="mt-2 list-disc pl-5 text-sm">
+      <li><a class="hover:underline" href="/ingredients/water/">Water density baseline</a></li>
+      <li><a class="hover:underline" href="/ingredients/sugar/">Sugar (granulated/powdered/brown)</a></li>
+      <li><a class="hover:underline" href="/ingredients/flour/">Flour (scooping vs sifting)</a></li>
+    </ul>
+  </div>
+</BaseLayout>
