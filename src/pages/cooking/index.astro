@@ -6,6 +6,16 @@ type Pair = { from: string; to: string };
 
 const ING = ingredients as Ingredient[];
 const PAIRS = cookingPairs as Pair[];
+
+// Only first 50 ingredients have conversion pages built
+// Only first 10 pairs are built per ingredient
+const BUILT_INGREDIENT_COUNT = 50;
+const BUILT_PAIRS_PER_INGREDIENT = 10;
+const builtIngs = ING.slice(0, BUILT_INGREDIENT_COUNT);
+const builtPairs = PAIRS.slice(0, BUILT_PAIRS_PER_INGREDIENT);
+
+// Find some popular conversions that actually exist
+const popularPairs = builtPairs.slice(0, 3); // tsp->tbsp, tsp->cup, tsp->g
 ---
 <html lang="en">
   <head>
@@ -20,26 +30,35 @@ const PAIRS = cookingPairs as Pair[];
     <h1>Cooking conversions</h1>
     <p>Select an ingredient and a conversion pair.</p>
 
-    <h2>Ingredients</h2>
+    <h2>Browse All Ingredients</h2>
+    <p><a href="/ingredients/">View all ingredients</a></p>
+
+    <h2>Ingredients with Conversions</h2>
     <ul>
-      {ING.map(i => (
-        <li><a href={`/ingredients/${i.slug}/`}>{i.name}</a></li>
+      {builtIngs.map(i => (
+        <li><a href={`/cooking/${i.slug}/`}>{i.name}</a></li>
       ))}
     </ul>
 
     <h2>Popular conversions</h2>
     <ul>
-      {ING.slice(0, 10).map(i => (
+      {builtIngs.slice(0, 10).map(i => (
         <li>
-          <a href={`/cooking/${i.slug}/cup-to-g/`}>1 cup {i.name} in g</a> ·
-          <a href={`/cooking/${i.slug}/cup-to-oz/`}>1 cup {i.name} in oz</a>
+          {popularPairs.map((pair, idx) => (
+            <>
+              {idx > 0 && " · "}
+              <a href={`/cooking/${i.slug}/${pair.from}-to-${pair.to}/`}>
+                1 {pair.from} {i.name} in {pair.to}
+              </a>
+            </>
+          ))}
         </li>
       ))}
     </ul>
 
-    <h2>All pairs</h2>
+    <h2>All available conversion pairs</h2>
     <ul>
-      {PAIRS.map(p => <li>{p.from} → {p.to}</li>)}
+      {builtPairs.map(p => <li>{p.from} → {p.to}</li>)}
     </ul>
   </body>
 </html>
