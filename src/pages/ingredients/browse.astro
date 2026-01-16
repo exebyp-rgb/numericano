@@ -1,0 +1,30 @@
+---
+import { ingredients } from "@/lib/data";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Browse All Ingredients — Numericano</title>
+    <meta name="description" content="Complete list of all cooking ingredients with density data and conversion tools." />
+    <link rel="canonical" href="https://numericano.com/ingredients/browse/" />
+  </head>
+  <body>
+    <p><a href="/">Numericano</a></p>
+    <h1>Browse All Ingredients</h1>
+    <p>Select an ingredient to view density data or cooking conversions.</p>
+
+    <ul>
+      {ingredients.map((ing) => (
+        <li>
+          <strong>{ing.name}</strong>
+          {" "}
+          <a href={`/ingredients/${ing.slug}/`}>Density</a>
+          {" "}
+          <a href={`/cooking/${ing.slug}/`}>Conversions</a>
+        </li>
+      ))}
+    </ul>
+  </body>
+</html>

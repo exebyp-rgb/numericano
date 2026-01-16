@@ -26,6 +26,10 @@ const categories = Object.keys(byCategory).sort();
     teaspoons, grams, and ounces.
   </p>
 
+  <p>
+    <a href="/ingredients/browse/">View complete list of all ingredients</a>
+  </p>
+
   {categories.map((category) => (
     <section>
       <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
