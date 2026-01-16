@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/generate-sitemap.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "count:pages": "node scripts/count-pages.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0"
