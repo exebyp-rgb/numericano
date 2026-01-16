@@ -12,13 +12,14 @@ type Ing = {
   variants: IngredientVariant[];
 };
 
-const ING = ingredients as Ing[];
-
 export async function getStaticPaths() {
+  const ING = ingredients as Ing[];
   return ING.map((ing) => ({
     params: { ingredient: ing.slug },
   }));
 }
+
+const ING = ingredients as Ing[];
 
 const { ingredient } = Astro.params;
 const ing = ING.find((i) => i.slug === ingredient) ?? ING[0];
@@ -45,7 +46,7 @@ for (let i = 0; i < units.length; i++) {
   }
 }
 
-const title = buildTitle(`${ing.name} conversions`);
+const title = buildTitle([ing.name, "conversions"]);
 const description = buildDescription(`Convert ${ing.name} between different units: cups, tablespoons, teaspoons, grams and ounces using typical density values.`);
 ---
 
