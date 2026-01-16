@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ingredients } from "@/lib/data";
+
+const title = "Browse All Ingredients — Numericano";
+const description = "Browse all available cooking ingredients with conversion tools and density data.";
+
+// Group ingredients by category
+const byCategory = ingredients.reduce(
+  (acc, ing) => {
+    const cat = ing.category || "other";
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(ing);
+    return acc;
+  },
+  {} as Record<string, typeof ingredients>
+);
+
+const categories = Object.keys(byCategory).sort();
+---
+
+<BaseLayout title={title} description={description}>
+  <h1>Browse All Ingredients</h1>
+  <p>
+    Select an ingredient to view conversion options between cups, tablespoons,
+    teaspoons, grams, and ounces.
+  </p>
+
+  {categories.map((category) => (
+    <section>
+      <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+      <ul>
+        {byCategory[category].map((ing) => (
+          <li>
+            <a href={`/cooking/${ing.slug}/`}>{ing.name}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>
