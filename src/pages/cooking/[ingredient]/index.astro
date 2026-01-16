@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ingredients from "../../../data/data/ingredients.json";
+import cookingPairs from "../../../data/data/cookingPairs.json";
 import type { Ingredient } from "../../../types";
 import { buildTitle, buildDescription } from "../../../lib/seo";
 
@@ -10,6 +11,11 @@ type Ing = {
   name: string;
   notes?: string;
   variants: IngredientVariant[];
+};
+
+type Pair = {
+  from: string;
+  to: string;
 };
 
 export async function getStaticPaths() {
@@ -28,23 +34,15 @@ if (!ing) {
   return Astro.redirect("/cooking");
 }
 
-const units = ["tsp", "tbsp", "cup", "g", "oz"];
-const conversions = [];
+// Only render conversion links for pairs that are actually generated
+// Currently: first 10 pairs from cookingPairs.json
+const ENABLED_PAIRS = (cookingPairs as Pair[]).slice(0, 10);
 
-for (let i = 0; i < units.length; i++) {
-  for (let j = i + 1; j < units.length; j++) {
-    conversions.push({
-      from: units[i],
-      to: units[j],
-      url: `/cooking/${ing.slug}/${units[i]}-to-${units[j]}/`,
-    });
-    conversions.push({
-      from: units[j],
-      to: units[i],
-      url: `/cooking/${ing.slug}/${units[j]}-to-${units[i]}/`,
-    });
-  }
-}
+const conversions = ENABLED_PAIRS.map((pair) => ({
+  from: pair.from,
+  to: pair.to,
+  url: `/cooking/${ing.slug}/${pair.from}-to-${pair.to}/`,
+}));
 
 const title = buildTitle([ing.name, "Cooking Conversions"]);
 const description = buildDescription(`Convert ${ing.name} between different units: cups, tablespoons, teaspoons, grams and ounces using typical density values.`);
