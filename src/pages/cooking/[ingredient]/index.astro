@@ -4,11 +4,26 @@ import ingredients from "../../../data/data/ingredients.json";
 import type { Ingredient } from "../../../types";
 import { buildTitle, buildDescription } from "../../../lib/seo";
 
-const { ingredient: slug } = Astro.params;
+type IngredientVariant = { name: string; density: number };
+type Ing = {
+  slug: string;
+  name: string;
+  notes?: string;
+  variants: IngredientVariant[];
+};
 
-const ING = ingredients.find((i) => i.slug === slug) as Ingredient;
+const ING = ingredients as Ing[];
 
-if (!ING) {
+export async function getStaticPaths() {
+  return ING.map((ing) => ({
+    params: { ingredient: ing.slug },
+  }));
+}
+
+const { ingredient } = Astro.params;
+const ing = ING.find((i) => i.slug === ingredient) ?? ING[0];
+
+if (!ing) {
   return Astro.redirect("/cooking");
 }
 
@@ -20,42 +35,28 @@ for (let i = 0; i < units.length; i++) {
     conversions.push({
       from: units[i],
       to: units[j],
-      url: `/cooking/${slug}/${units[i]}-to-${units[j]}/`,
+      url: `/cooking/${ing.slug}/${units[i]}-to-${units[j]}/`,
     });
     conversions.push({
       from: units[j],
       to: units[i],
-      url: `/cooking/${slug}/${units[j]}-to-${units[i]}/`,
+      url: `/cooking/${ing.slug}/${units[j]}-to-${units[i]}/`,
     });
   }
 }
 
-const title = buildTitle([`${ING.name} conversions`]);
-const description = buildDescription(`Convert ${ING.name} between different units: cups, tablespoons, teaspoons, grams and ounces using typical density & variants.`);
+const title = buildTitle(`${ing.name} conversions`);
+const description = buildDescription(`Convert ${ing.name} between different units: cups, tablespoons, teaspoons, grams and ounces using typical density values.`);
 ---
 
 <BaseLayout title={title} description={description}>
-  <h1 class="text-3xl font-semibold tracking-tight">{ING.name} · conversions</h1>
-  <p class="mt-2 text-slate-700 max-w-2xl">
-    Convert {ING.name} between different measurement units. Select the units you want to
-    convert from and to.
-  </p>
-
-  <ul class="mt-6 grid gap-2 sm:grid-cols-2">
-    {conversions.map((c) => (
-      <li>
-        <a
-          class="block rounded-lg border px-4 py-3 hover:bg-slate-50"
-          href={c.url}
-        >
-          <div class="font-medium">
-            {c.from} → {c.to}
-          </div>
-          <div class="text-xs text-slate-600">
-            Convert {ING.name} from {c.from} to {c.to}
-          </div>
-        </a>
-      </li>
+  <h1>{ing.name} — Cooking</h1>
+  <p>{ing.notes ?? ""}</p>
+  
+  <h2>Available Conversions</h2>
+  <ul>
+    {conversions.map((conv) => (
+      <li><a href={conv.url}>{conv.from} to {conv.to}</a></li>
     ))}
   </ul>
 </BaseLayout>
