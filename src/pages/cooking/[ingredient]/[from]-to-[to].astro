@@ -1,47 +1,226 @@
 ---
-// Импорты — каждая запись на своей строке
-import ingredients from "../../../data/data/ingredients.json";
-import pairs from "../../../data/data/cookingPairs.json";
-import { volumeToMass, fat } from "../../../lib/convert";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ingredients, cookingPairs } from "@/lib/data";
+import type { Ingredient, CookingPair } from "@/lib/data";
 
-// Типы — обязательно на отдельных строках
-type IngredientVariant = {
-  name: string;
-  density: number;
+// Scale to 500 pages: 50 ingredients × 10 pairs
+const VOLUME_UNITS = ["tsp", "tbsp", "cup"] as const;
+const MASS_UNITS = ["g", "oz"] as const;
+type Volume = typeof VOLUME_UNITS[number];
+type Mass = typeof MASS_UNITS[number];
+type Unit = Volume | Mass;
+
+const ML_PER: Record<Volume, number> = {
+  tsp: 4.92892159375,
+  tbsp: 14.78676478125,
+  cup: 236.5882365,
 };
 
-type Ingredient = {
-  slug: string;
-  name: string;
-  notes?: string;
-  variants: IngredientVariant[];
+const G_PER: Record<Exclude<Mass, "g">, number> = {
+  oz: 28.349523125,
 };
 
-// Привязка данных
-const ING = ingredients as Ingredient[];
-
-// Минимальный getStaticPaths для проверки сборки
-export async function getStaticPaths() {
-  return [
-    { params: { ingredient: "sugar", from: "cup", to: "g" } }
-  ];
+function volumeToMl(amt: number, unit: Volume): number {
+  return amt * ML_PER[unit];
 }
 
-// Доступ к параметрам маршрута
+function mlToVolume(ml: number, unit: Volume): number {
+  return ml / ML_PER[unit];
+}
+
+function massToG(amt: number, unit: Mass): number {
+  if (unit === "g") return amt;
+  return amt * G_PER[unit];
+}
+
+function gToUnit(g: number, unit: Mass): number {
+  if (unit === "g") return g;
+  return g / G_PER[unit];
+}
+
+function fmt(n: number): string {
+  return n.toFixed(2).replace(/\.?0+$/, "");
+}
+
+function convert(amt: number, from: Unit, to: Unit, density: number): number {
+  const isFromVol = VOLUME_UNITS.includes(from as Volume);
+  const isToVol = VOLUME_UNITS.includes(to as Volume);
+
+  if (isFromVol && isToVol) {
+    const ml = volumeToMl(amt, from as Volume);
+    return mlToVolume(ml, to as Volume);
+  }
+
+  if (!isFromVol && !isToVol) {
+    const g = massToG(amt, from as Mass);
+    return gToUnit(g, to as Mass);
+  }
+
+  if (isFromVol && !isToVol) {
+    const ml = volumeToMl(amt, from as Volume);
+    const g = ml * density;
+    return gToUnit(g, to as Mass);
+  }
+
+  const g = massToG(amt, from as Mass);
+  const ml = g / density;
+  return mlToVolume(ml, to as Volume);
+}
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { ingredient: string; from: string; to: string } }> = [];
+  
+  for (const ing of ingredients.slice(0, 50)) {
+    for (const pair of cookingPairs.slice(0, 10)) {
+      paths.push({
+        params: {
+          ingredient: ing.slug,
+          from: pair.from,
+          to: pair.to,
+        },
+      });
+    }
+  }
+  
+  return paths;
+}
+
 const { ingredient, from, to } = Astro.params;
 
-// Небольшая логика рендера (без сложных вычислений)
-const ing = ING.find(i => i.slug === ingredient) ?? ING[0];
-const title = ing ? `${ing.name}: ${from} → ${to}` : `${ingredient} conversion`;
+const ing = ingredients.find((i) => i.slug === ingredient);
+if (!ing) {
+  return Astro.redirect("/cooking/");
+}
+
+const defaultVariant = ing.variants.find((v) => v.key === ing.defaultVariant) || ing.variants[0];
+const density = defaultVariant.density_g_ml;
+
+const commonAmounts = [0.25, 0.5, 1, 2, 3];
+const conversions = commonAmounts.map((amt) => ({
+  from: `${fmt(amt)} ${from}`,
+  to: `${fmt(convert(amt, from as Unit, to as Unit, density))} ${to}`,
+}));
+
+const title = `${ing.name}: ${from} to ${to} conversion`;
+const description = `Convert ${ing.name} from ${from} to ${to}. Density: ${density} g/ml (${defaultVariant.label}). Includes calculator and common amounts table.`;
 ---
 
-<html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <h1>{title}</h1>
-    <p>Короткий ответ и проверка работы маршрута для <strong>{ingredient}</strong>.</p>
-  </body>
-</html>
+<BaseLayout title={title} description={description}>
+  <h1>{ing.name}: {from} → {to}</h1>
+  <p><strong>Variant:</strong> {defaultVariant.label} • <strong>Density:</strong> {density} g/ml</p>
+  {ing.notes && <p class="text-sm text-gray-600">{ing.notes}</p>}
+
+  <h2>Common amounts</h2>
+  <table class="w-full border-collapse">
+    <thead>
+      <tr class="border-b">
+        <th class="text-left p-2">{from}</th>
+        <th class="text-left p-2">{to}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {conversions.map((c) => (
+        <tr class="border-b">
+          <td class="p-2">{c.from}</td>
+          <td class="p-2">{c.to}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <h2>Calculator</h2>
+  <div class="my-4">
+    <label class="block mb-2">
+      Amount in <strong>{from}</strong>:
+      <input 
+        type="number" 
+        id="inputAmt" 
+        value="1" 
+        step="0.01" 
+        class="border p-2 ml-2 rounded"
+      />
+    </label>
+    <p class="mt-2">
+      Result: <span id="result" class="font-bold"></span> {to}
+    </p>
+  </div>
+
+  <script define:vars={{ from, to, density }}>
+    const VOLUME_UNITS = ["tsp", "tbsp", "cup"];
+    const MASS_UNITS = ["g", "oz"];
+    
+    const ML_PER = {
+      tsp: 4.92892159375,
+      tbsp: 14.78676478125,
+      cup: 236.5882365,
+    };
+    
+    const G_PER = {
+      oz: 28.349523125,
+    };
+    
+    function volumeToMl(amt, unit) {
+      return amt * ML_PER[unit];
+    }
+    
+    function mlToVolume(ml, unit) {
+      return ml / ML_PER[unit];
+    }
+    
+    function massToG(amt, unit) {
+      if (unit === "g") return amt;
+      return amt * G_PER[unit];
+    }
+    
+    function gToUnit(g, unit) {
+      if (unit === "g") return g;
+      return g / G_PER[unit];
+    }
+    
+    function fmt(n) {
+      return n.toFixed(2).replace(/\.?0+$/, "");
+    }
+    
+    function convert(amt, fromUnit, toUnit, dens) {
+      const isFromVol = VOLUME_UNITS.includes(fromUnit);
+      const isToVol = VOLUME_UNITS.includes(toUnit);
+      
+      if (isFromVol && isToVol) {
+        const ml = volumeToMl(amt, fromUnit);
+        return mlToVolume(ml, toUnit);
+      }
+      
+      if (!isFromVol && !isToVol) {
+        const g = massToG(amt, fromUnit);
+        return gToUnit(g, toUnit);
+      }
+      
+      if (isFromVol && !isToVol) {
+        const ml = volumeToMl(amt, fromUnit);
+        const g = ml * dens;
+        return gToUnit(g, toUnit);
+      }
+      
+      const g = massToG(amt, fromUnit);
+      const ml = g / dens;
+      return mlToVolume(ml, toUnit);
+    }
+    
+    const input = document.getElementById("inputAmt");
+    const result = document.getElementById("result");
+    
+    function update() {
+      const amt = parseFloat(input.value) || 0;
+      const res = convert(amt, from, to, density);
+      result.textContent = fmt(res);
+    }
+    
+    input.addEventListener("input", update);
+    update();
+  </script>
+
+  <p class="mt-6 text-sm text-gray-600">
+    <a href={`/cooking/${ing.slug}/`} class="underline">All {ing.name} conversions</a> • 
+    <a href="/cooking/" class="underline">All ingredients</a>
+  </p>
+</BaseLayout>
