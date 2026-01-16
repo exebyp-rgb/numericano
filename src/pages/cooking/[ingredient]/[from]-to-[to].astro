@@ -1,8 +1,7 @@
 ---
-import ingredients from "../../../../data/ingredients.json";
-import pairs from "../../../../data/cookingPairs.json";
-import { volumeToMass, fmt } from "../../../lib/convert";
-
+import ingredients from "@/data/ingredients.json";
+import pairs from "@/data/cookingPairs.json";
+import { volumeToMass, fat } from "@/lib/convert";
 type IngredientVariant = { name: string; density: number };
 type Ingredient = { slug: string; name: string; notes: string; variants: IngredientVariant[] };
 type Pair = { from: "cup" | "tbsp" | "tsp"; to: "g" | "oz" };
