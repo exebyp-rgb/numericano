@@ -1,6 +1,5 @@
-import ingredients from "../data/data/ingredients.json";
+import { ingredients } from "@/lib/data";
 import type { Ingredient } from "../types";
-
 const ING = ingredients as Ingredient[];
 
 export function getIngredient(slug: string): Ingredient | undefined {
