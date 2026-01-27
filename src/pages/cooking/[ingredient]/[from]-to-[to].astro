@@ -3,6 +3,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ingredients, cookingPairs } from "@/lib/data";
 import type { Ingredient, CookingPair } from "@/lib/data";
 
+export const prerender = true;
+
 // Scale to 500 pages: 50 ingredients × 10 pairs
 const VOLUME_UNITS = ["tsp", "tbsp", "cup"] as const;
 const MASS_UNITS = ["g", "oz"] as const;
@@ -70,8 +72,8 @@ function convert(amt: number, from: Unit, to: Unit, density: number): number {
 export async function getStaticPaths() {
   const paths: Array<{ params: { ingredient: string; from: string; to: string } }> = [];
   
-  for (const ing of ingredients.slice(0, 50)) {
-    for (const pair of cookingPairs.slice(0, 10)) {
+  for (const ing of ingredients) {
+    for (const pair of cookingPairs) {
       paths.push({
         params: {
           ingredient: ing.slug,
@@ -88,7 +90,7 @@ export async function getStaticPaths() {
 const { ingredient, from, to } = Astro.params;
 
 const ing = ingredients.find((i) => i.slug === ingredient);
-const ENABLED_PAIRS = cookingPairs.slice(0, 10);
+const ENABLED_PAIRS = cookingPairs;
 const pairExists = ENABLED_PAIRS.some((p) => p.from === from && p.to === to);
 
 // Check if ingredient or pair is not found/allowed
@@ -199,7 +201,7 @@ if (!isFallback) {
         </p>
       </div>
 
-      <script define:vars={{ from, to, density }}>
+      <script is:inline define:vars={{ from, to, density }}>
         const VOLUME_UNITS = ["tsp", "tbsp", "cup"];
         const MASS_UNITS = ["g", "oz"];
         

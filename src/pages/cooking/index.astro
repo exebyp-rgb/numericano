@@ -7,12 +7,8 @@ type Pair = { from: string; to: string };
 const ING = ingredients as Ingredient[];
 const PAIRS = cookingPairs as Pair[];
 
-// Only first 50 ingredients have conversion pages built
-// Only first 10 pairs are built per ingredient
-const BUILT_INGREDIENT_COUNT = 50;
-const BUILT_PAIRS_PER_INGREDIENT = 10;
-const builtIngs = ING.slice(0, BUILT_INGREDIENT_COUNT);
-const builtPairs = PAIRS.slice(0, BUILT_PAIRS_PER_INGREDIENT);
+const builtIngs = ING;
+const builtPairs = PAIRS;
 
 // Find some popular conversions that actually exist
 const popularPairs = builtPairs.slice(0, 3); // tsp->tbsp, tsp->cup, tsp->g

@@ -6,6 +6,8 @@ import { buildTitle, buildDescription } from "../../lib/seo";
 import { getDensityRangeGPerMl } from "../../lib/density";
 import { formatNumber } from "../../lib/units";
 
+export const prerender = true;
+
 export function getStaticPaths() {
   const ING = ingredients as Ingredient[];
   return ING.map(i => ({ params: { slug: i.slug } }));

@@ -5,6 +5,8 @@ import cookingPairs from "../../../data/data/cookingPairs.json";
 import type { Ingredient } from "../../../types";
 import { buildTitle, buildDescription } from "../../../lib/seo";
 
+export const prerender = true;
+
 type IngredientVariant = { name: string; density: number };
 type Ing = {
   slug: string;
@@ -35,8 +37,7 @@ if (!ing) {
 }
 
 // Only render conversion links for pairs that are actually generated
-// Currently: first 10 pairs from cookingPairs.json
-const ENABLED_PAIRS = (cookingPairs as Pair[]).slice(0, 10);
+const ENABLED_PAIRS = cookingPairs as Pair[];
 
 const conversions = ENABLED_PAIRS.map((pair) => ({
   from: pair.from,

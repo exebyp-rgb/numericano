@@ -1,7 +1,7 @@
 import { ingredients, cookingPairs } from "@/lib/data";
 
-const BUILT_INGREDIENT_COUNT = 50;
-const BUILT_PAIRS_PER_INGREDIENT = 10;
+const BUILT_INGREDIENT_COUNT = ingredients.length;
+const BUILT_PAIRS_PER_INGREDIENT = cookingPairs.length;
 
 export async function GET() {
   const baseUrl = "https://numericano.com";
@@ -49,7 +49,7 @@ export async function GET() {
     },
   ];
 
-  // Add ingredient hub pages (first 50)
+  // Add ingredient hub pages
   const builtIngs = ingredients.slice(0, BUILT_INGREDIENT_COUNT);
   builtIngs.forEach((ing) => {
     entries.push({
@@ -68,7 +68,7 @@ export async function GET() {
     });
   });
 
-  // Add conversion pages (first 50 ingredients × first 10 pairs)
+  // Add conversion pages (all ingredients × all pairs)
   const builtPairs = cookingPairs.slice(0, BUILT_PAIRS_PER_INGREDIENT);
   builtIngs.forEach((ing) => {
     builtPairs.forEach((pair) => {
