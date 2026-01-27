@@ -24,8 +24,8 @@ export type Ingredient = {
 };
 
 export type CookingPair = {
-  from: "tsp" | "tbsp" | "cup" | "g" | "oz";
-  to: "tsp" | "tbsp" | "cup" | "g" | "oz";
+  from: "tsp" | "tbsp" | "cup" | "ml" | "g" | "oz";
+  to: "tsp" | "tbsp" | "cup" | "ml" | "g" | "oz";
 };
 
 export const ingredients = ingredientsRaw as Ingredient[];

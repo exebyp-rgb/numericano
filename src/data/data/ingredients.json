@@ -1,52 +1,1123 @@
 [
-  {"slug":"sugar","name":"Sugar","synonyms":["granulated sugar"],"category":"cooking","defaultVariant":"granulated","variants":[{"key":"granulated","label":"Granulated","density_g_ml":0.85},{"key":"powdered","label":"Powdered","density_g_ml":0.56},{"key":"brown","label":"Brown (packed)","density_g_ml":0.95}],"notes":"Density varies by type and packing.","sources":["Reference densities (typical)."]},
-  {"slug":"flour","name":"Flour","synonyms":["all-purpose flour"],"category":"cooking","defaultVariant":"all-purpose","variants":[{"key":"all-purpose","label":"All-purpose","density_g_ml":0.53},{"key":"bread","label":"Bread flour","density_g_ml":0.56},{"key":"whole-wheat","label":"Whole wheat","density_g_ml":0.59}],"notes":"Scooping and sifting changes volume dramatically.","sources":["Reference densities (typical)."]},
-  {"slug":"salt","name":"Salt","synonyms":["table salt"],"category":"cooking","defaultVariant":"table","variants":[{"key":"table","label":"Table salt","density_g_ml":1.20},{"key":"kosher","label":"Kosher salt","density_g_ml":0.72}],"notes":"Crystal size changes packing.","sources":["Reference densities (typical)."]},
-  {"slug":"rice","name":"Rice (uncooked)","synonyms":["white rice"],"category":"cooking","defaultVariant":"white","variants":[{"key":"white","label":"White rice","density_g_ml":0.85},{"key":"brown","label":"Brown rice","density_g_ml":0.80}],"notes":"Grain size affects packing.","sources":["Reference densities (typical)."]},
-  {"slug":"oats","name":"Oats","synonyms":["rolled oats"],"category":"cooking","defaultVariant":"rolled","variants":[{"key":"rolled","label":"Rolled oats","density_g_ml":0.35},{"key":"quick","label":"Quick oats","density_g_ml":0.40}],"notes":"Oats pack loosely; varies.","sources":["Reference densities (typical)."]},
-  {"slug":"honey","name":"Honey","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":1.42}],"notes":"Temperature affects density slightly.","sources":["Reference densities (typical)."]},
-  {"slug":"milk","name":"Milk","synonyms":["whole milk"],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":1.03}],"notes":"Varies with fat content.","sources":["Reference densities (typical)."]},
-  {"slug":"water","name":"Water","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"~20°C","density_g_ml":0.998}],"notes":"Density depends on temperature.","sources":["Reference densities (typical)."]},
-  {"slug":"olive-oil","name":"Olive Oil","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.91}],"notes":"Varies by temperature and blend.","sources":["Reference densities (typical)."]},
-  {"slug":"butter","name":"Butter","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.96}],"notes":"Softened vs melted changes volume.","sources":["Reference densities (typical)."]},
-  {"slug":"baking-powder","name":"Baking Powder","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.90}],"notes":"Double-acting baking powder.","sources":["Reference densities (typical)."]},
-  {"slug":"baking-soda","name":"Baking Soda","synonyms":["sodium bicarbonate"],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.85}],"notes":"Fine powder.","sources":["Reference densities (typical)."]},
-  {"slug":"cornstarch","name":"Cornstarch","synonyms":["corn starch"],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.64}],"notes":"Fine powder, packs lightly.","sources":["Reference densities (typical)."]},
-  {"slug":"cocoa-powder","name":"Cocoa Powder","synonyms":["unsweetened cocoa"],"category":"cooking","defaultVariant":"unsweetened","variants":[{"key":"unsweetened","label":"Unsweetened","density_g_ml":0.51},{"key":"dutch","label":"Dutch-process","density_g_ml":0.53}],"notes":"Sift for accuracy.","sources":["Reference densities (typical)."]},
-  {"slug":"powdered-sugar","name":"Powdered Sugar","synonyms":["icing sugar","confectioners sugar"],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.56}],"notes":"Also called confectioners' sugar.","sources":["Reference densities (typical)."]},
-  {"slug":"brown-sugar","name":"Brown Sugar","synonyms":["light brown sugar"],"category":"cooking","defaultVariant":"packed","variants":[{"key":"packed","label":"Packed","density_g_ml":0.95},{"key":"unpacked","label":"Unpacked","density_g_ml":0.70}],"notes":"Always measure packed unless noted.","sources":["Reference densities (typical)."]},
-  {"slug":"maple-syrup","name":"Maple Syrup","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":1.32}],"notes":"Pure maple syrup.","sources":["Reference densities (typical)."]},
-  {"slug":"molasses","name":"Molasses","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":1.40}],"notes":"Dark, thick liquid.","sources":["Reference densities (typical)."]},
-  {"slug":"peanut-butter","name":"Peanut Butter","synonyms":[],"category":"cooking","defaultVariant":"creamy","variants":[{"key":"creamy","label":"Creamy","density_g_ml":1.05},{"key":"chunky","label":"Chunky","density_g_ml":1.02}],"notes":"Creamy vs chunky varies.","sources":["Reference densities (typical)."]},
-  {"slug":"almond-flour","name":"Almond Flour","synonyms":["almond meal"],"category":"cooking","defaultVariant":"blanched","variants":[{"key":"blanched","label":"Blanched","density_g_ml":0.40},{"key":"unblanched","label":"Unblanched (meal)","density_g_ml":0.38}],"notes":"Finely ground almonds.","sources":["Reference densities (typical)."]},
-  {"slug":"coconut-flour","name":"Coconut Flour","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.48}],"notes":"Very absorbent, pack lightly.","sources":["Reference densities (typical)."]},
-  {"slug":"semolina","name":"Semolina","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.70}],"notes":"Coarse durum wheat.","sources":["Reference densities (typical)."]},
-  {"slug":"couscous","name":"Couscous","synonyms":[],"category":"cooking","defaultVariant":"dry","variants":[{"key":"dry","label":"Dry","density_g_ml":0.72}],"notes":"Small pasta granules.","sources":["Reference densities (typical)."]},
-  {"slug":"quinoa","name":"Quinoa","synonyms":[],"category":"cooking","defaultVariant":"dry","variants":[{"key":"dry","label":"Dry (uncooked)","density_g_ml":0.75}],"notes":"Uncooked seeds.","sources":["Reference densities (typical)."]},
-  {"slug":"lentils","name":"Lentils","synonyms":[],"category":"cooking","defaultVariant":"dry","variants":[{"key":"dry","label":"Dry","density_g_ml":0.85}],"notes":"Uncooked lentils.","sources":["Reference densities (typical)."]},
-  {"slug":"chickpeas-dry","name":"Chickpeas (dry)","synonyms":["garbanzo beans"],"category":"cooking","defaultVariant":"dry","variants":[{"key":"dry","label":"Dry","density_g_ml":0.78}],"notes":"Uncooked chickpeas.","sources":["Reference densities (typical)."]},
-  {"slug":"black-beans-dry","name":"Black Beans (dry)","synonyms":[],"category":"cooking","defaultVariant":"dry","variants":[{"key":"dry","label":"Dry","density_g_ml":0.81}],"notes":"Uncooked black beans.","sources":["Reference densities (typical)."]},
-  {"slug":"pasta-penne","name":"Pasta (penne)","synonyms":[],"category":"cooking","defaultVariant":"dry","variants":[{"key":"dry","label":"Dry","density_g_ml":0.58}],"notes":"Dry penne pasta.","sources":["Reference densities (typical)."]},
-  {"slug":"breadcrumbs","name":"Breadcrumbs","synonyms":[],"category":"cooking","defaultVariant":"dry","variants":[{"key":"dry","label":"Dry","density_g_ml":0.35},{"key":"fresh","label":"Fresh","density_g_ml":0.25}],"notes":"Dry vs fresh varies.","sources":["Reference densities (typical)."]},
-  {"slug":"panko","name":"Panko Breadcrumbs","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.25}],"notes":"Japanese-style flaky crumbs.","sources":["Reference densities (typical)."]},
-  {"slug":"yeast","name":"Active Dry Yeast","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.60}],"notes":"Granulated dry yeast.","sources":["Reference densities (typical)."]},
-  {"slug":"granola","name":"Granola","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.40}],"notes":"Varies by ingredients and packing.","sources":["Reference densities (typical)."]},
-  {"slug":"chocolate-chips","name":"Chocolate Chips","synonyms":[],"category":"cooking","defaultVariant":"semi-sweet","variants":[{"key":"semi-sweet","label":"Semi-sweet","density_g_ml":0.65}],"notes":"Standard baking chips.","sources":["Reference densities (typical)."]},
-  {"slug":"raisins","name":"Raisins","synonyms":[],"category":"cooking","defaultVariant":"packed","variants":[{"key":"packed","label":"Packed","density_g_ml":0.65},{"key":"loose","label":"Loose","density_g_ml":0.55}],"notes":"Packing affects density.","sources":["Reference densities (typical)."]},
-  {"slug":"dried-cranberries","name":"Dried Cranberries","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.60}],"notes":"Sweetened dried fruit.","sources":["Reference densities (typical)."]},
-  {"slug":"walnuts","name":"Walnuts (chopped)","synonyms":[],"category":"cooking","defaultVariant":"chopped","variants":[{"key":"chopped","label":"Chopped","density_g_ml":0.48},{"key":"halves","label":"Halves","density_g_ml":0.42}],"notes":"Chop size affects volume.","sources":["Reference densities (typical)."]},
-  {"slug":"almonds-sliced","name":"Almonds (sliced)","synonyms":[],"category":"cooking","defaultVariant":"sliced","variants":[{"key":"sliced","label":"Sliced","density_g_ml":0.35}],"notes":"Thin sliced almonds.","sources":["Reference densities (typical)."]},
-  {"slug":"pecans","name":"Pecans (chopped)","synonyms":[],"category":"cooking","defaultVariant":"chopped","variants":[{"key":"chopped","label":"Chopped","density_g_ml":0.42}],"notes":"Chopped pecans.","sources":["Reference densities (typical)."]},
-  {"slug":"cashews","name":"Cashews","synonyms":[],"category":"cooking","defaultVariant":"whole","variants":[{"key":"whole","label":"Whole","density_g_ml":0.58}],"notes":"Whole roasted cashews.","sources":["Reference densities (typical)."]},
-  {"slug":"pistachios","name":"Pistachios (shelled)","synonyms":[],"category":"cooking","defaultVariant":"shelled","variants":[{"key":"shelled","label":"Shelled","density_g_ml":0.55}],"notes":"Shelled, no shells.","sources":["Reference densities (typical)."]},
-  {"slug":"sunflower-seeds","name":"Sunflower Seeds","synonyms":[],"category":"cooking","defaultVariant":"hulled","variants":[{"key":"hulled","label":"Hulled","density_g_ml":0.55}],"notes":"Hulled seeds.","sources":["Reference densities (typical)."]},
-  {"slug":"pumpkin-seeds","name":"Pumpkin Seeds (pepitas)","synonyms":["pepitas"],"category":"cooking","defaultVariant":"hulled","variants":[{"key":"hulled","label":"Hulled","density_g_ml":0.52}],"notes":"Green hulled seeds.","sources":["Reference densities (typical)."]},
-  {"slug":"chia-seeds","name":"Chia Seeds","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.68}],"notes":"Tiny black/white seeds.","sources":["Reference densities (typical)."]},
-  {"slug":"flaxseed","name":"Flaxseed (ground)","synonyms":[],"category":"cooking","defaultVariant":"ground","variants":[{"key":"ground","label":"Ground","density_g_ml":0.42}],"notes":"Ground flax meal.","sources":["Reference densities (typical)."]},
-  {"slug":"vegetable-oil","name":"Vegetable Oil","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.92}],"notes":"Generic vegetable oil.","sources":["Reference densities (typical)."]},
-  {"slug":"canola-oil","name":"Canola Oil","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":0.92}],"notes":"Rapeseed oil.","sources":["Reference densities (typical)."]},
-  {"slug":"yogurt","name":"Yogurt","synonyms":["plain yogurt"],"category":"cooking","defaultVariant":"plain","variants":[{"key":"plain","label":"Plain","density_g_ml":1.05},{"key":"greek","label":"Greek","density_g_ml":1.10}],"notes":"Plain vs Greek differs.","sources":["Reference densities (typical)."]},
-  {"slug":"sour-cream","name":"Sour Cream","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":1.02}],"notes":"Full-fat sour cream.","sources":["Reference densities (typical)."]},
-  {"slug":"cream-cheese","name":"Cream Cheese","synonyms":[],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":1.05}],"notes":"Softened cream cheese.","sources":["Reference densities (typical)."]},
-  {"slug":"heavy-cream","name":"Heavy Cream","synonyms":["whipping cream"],"category":"cooking","defaultVariant":"default","variants":[{"key":"default","label":"Standard","density_g_ml":1.01}],"notes":"Heavy whipping cream.","sources":["Reference densities (typical)."]}
+  {
+    "slug": "all-purpose-flour",
+    "name": "All-purpose flour",
+    "synonyms": ["AP flour"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.53}],
+    "notes": "Scoop-and-level for accuracy; sifting changes packing and weight per cup.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "bread-flour",
+    "name": "Bread flour",
+    "synonyms": ["strong flour"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.56}],
+    "notes": "Higher protein flour that packs slightly denser than all-purpose flour.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "cake-flour",
+    "name": "Cake flour",
+    "synonyms": ["soft flour"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.45}],
+    "notes": "Finely milled and often bleached, so it packs lighter than all-purpose flour.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "whole-wheat-flour",
+    "name": "Whole wheat flour",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.59}],
+    "notes": "Bran and germ increase density compared to white flour.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "almond-flour",
+    "name": "Almond flour",
+    "synonyms": ["almond meal"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Blanched", "density_g_ml": 0.40}],
+    "notes": "Finely ground almonds pack lightly; oil content affects weight.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "cornmeal",
+    "name": "Cornmeal",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Medium grind", "density_g_ml": 0.62}],
+    "notes": "Coarser grind traps air, reducing weight per cup.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "cornstarch",
+    "name": "Cornstarch",
+    "synonyms": ["corn starch"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.64}],
+    "notes": "Fine powder that compacts with tapping.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "cocoa-powder",
+    "name": "Cocoa powder",
+    "synonyms": ["unsweetened cocoa"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Unsweetened", "density_g_ml": 0.51}],
+    "notes": "Sifted cocoa weighs less than cocoa that is compacted.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "baking-powder",
+    "name": "Baking powder",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.90}],
+    "notes": "A fine, double-acting leavener.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "baking-soda",
+    "name": "Baking soda",
+    "synonyms": ["sodium bicarbonate"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.85}],
+    "notes": "Fine powder; scoop lightly for consistent results.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "dry-yeast",
+    "name": "Dry yeast",
+    "synonyms": ["active dry yeast"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Granulated", "density_g_ml": 0.60}],
+    "notes": "Granules settle; level off spoonfuls for accuracy.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "fresh-yeast",
+    "name": "Fresh yeast",
+    "synonyms": ["compressed yeast"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Fresh block", "density_g_ml": 0.75}],
+    "notes": "Moist yeast weighs more per volume than dry granules.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "granulated-sugar",
+    "name": "Granulated sugar",
+    "synonyms": ["white sugar"],
+    "category": "baking",
+    "defaultVariant": "granulated",
+    "variants": [{"key": "granulated", "label": "Granulated", "density_g_ml": 0.85}],
+    "notes": "Granules pack with vibration; avoid shaking the cup.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "powdered-sugar",
+    "name": "Powdered sugar",
+    "synonyms": ["confectioners sugar"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.56}],
+    "notes": "Sift for lightness; powder compacts easily.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "brown-sugar",
+    "name": "Brown sugar",
+    "synonyms": ["light brown sugar"],
+    "category": "baking",
+    "defaultVariant": "packed",
+    "variants": [
+      {"key": "packed", "label": "Packed", "density_g_ml": 0.95},
+      {"key": "loose", "label": "Loose", "density_g_ml": 0.70}
+    ],
+    "notes": "Moisture and packing change weight significantly.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "light-brown-sugar",
+    "name": "Light brown sugar",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Packed", "density_g_ml": 0.90}],
+    "notes": "Lighter molasses content; still measure packed unless noted.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "dark-brown-sugar",
+    "name": "Dark brown sugar",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Packed", "density_g_ml": 1.00}],
+    "notes": "Higher molasses content makes it denser.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "chocolate-chips",
+    "name": "Chocolate chips",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Semi-sweet", "density_g_ml": 0.65}],
+    "notes": "Chip size and shape affect how they settle in a cup.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "chocolate-melted",
+    "name": "Chocolate (melted)",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Melted", "density_g_ml": 1.30}],
+    "notes": "Melted chocolate is dense and fluid; temperature shifts density slightly.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "rolled-cookie-crumbs",
+    "name": "Rolled cookie crumbs",
+    "synonyms": ["cookie crumbs"],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.50}],
+    "notes": "Crumb size and pressure alter packing.",
+    "sources": ["Typical baking density references."]
+  },
+
+  {
+    "slug": "whole-milk",
+    "name": "Milk (whole)",
+    "synonyms": ["whole milk"],
+    "category": "dairy",
+    "defaultVariant": "whole",
+    "variants": [{"key": "whole", "label": "Whole", "density_g_ml": 1.03}],
+    "notes": "Fat content reduces density slightly compared to skim milk.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "skim-milk",
+    "name": "Milk (skim)",
+    "synonyms": ["skim milk"],
+    "category": "dairy",
+    "defaultVariant": "skim",
+    "variants": [{"key": "skim", "label": "Skim", "density_g_ml": 1.035}],
+    "notes": "Lower fat raises density slightly.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "heavy-cream",
+    "name": "Heavy cream",
+    "synonyms": ["heavy whipping cream"],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.01}],
+    "notes": "Higher fat than milk; density varies with brand.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "whipping-cream",
+    "name": "Whipping cream",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.99}],
+    "notes": "Slightly lighter than heavy cream due to lower fat.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "half-and-half",
+    "name": "Half-and-half",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.02}],
+    "notes": "Blend of milk and cream; density sits between them.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "butter",
+    "name": "Butter",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "solid",
+    "variants": [{"key": "solid", "label": "Solid", "density_g_ml": 0.96}],
+    "notes": "Solid butter traps air between cubes; melted butter weighs more per volume.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "butter-melted",
+    "name": "Butter (melted)",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "melted",
+    "variants": [{"key": "melted", "label": "Melted", "density_g_ml": 0.91}],
+    "notes": "Melted butter removes air gaps, increasing weight per volume.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "cream-cheese",
+    "name": "Cream cheese",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.05}],
+    "notes": "Softened cream cheese spreads but still packs dense.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "sour-cream",
+    "name": "Sour cream",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.02}],
+    "notes": "Full-fat sour cream density varies slightly by brand.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "greek-yogurt",
+    "name": "Greek yogurt",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Strained", "density_g_ml": 1.10}],
+    "notes": "Strained texture is thicker and denser than regular yogurt.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "plain-yogurt",
+    "name": "Yogurt (plain)",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Plain", "density_g_ml": 1.05}],
+    "notes": "Plain yogurt is less dense than Greek yogurt.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "ricotta",
+    "name": "Ricotta",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Fresh", "density_g_ml": 1.03}],
+    "notes": "Moist curds trap air; drain for heavier measures.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "shredded-cheddar",
+    "name": "Shredded cheddar",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Shredded", "density_g_ml": 0.42}],
+    "notes": "Shreds trap air; gently fill the cup for consistent results.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "grated-parmesan",
+    "name": "Grated parmesan",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Grated", "density_g_ml": 0.50}],
+    "notes": "Finely grated cheese compacts more than shredded cheese.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "condensed-milk",
+    "name": "Condensed milk",
+    "synonyms": ["sweetened condensed milk"],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Sweetened", "density_g_ml": 1.30}],
+    "notes": "High sugar content makes it much denser than milk.",
+    "sources": ["Typical dairy density references."]
+  },
+
+  {
+    "slug": "olive-oil",
+    "name": "Olive oil",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.91}],
+    "notes": "Oil density shifts with temperature and blend.",
+    "sources": ["Typical oil density references."]
+  },
+  {
+    "slug": "vegetable-oil",
+    "name": "Vegetable oil",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.92}],
+    "notes": "Generic blends hover around 0.92 g/mL.",
+    "sources": ["Typical oil density references."]
+  },
+  {
+    "slug": "canola-oil",
+    "name": "Canola oil",
+    "synonyms": ["rapeseed oil"],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.92}],
+    "notes": "Comparable density to most vegetable oils.",
+    "sources": ["Typical oil density references."]
+  },
+  {
+    "slug": "coconut-oil",
+    "name": "Coconut oil",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Solid", "density_g_ml": 0.92}],
+    "notes": "Solid at cooler temperatures; melts quickly near room temp.",
+    "sources": ["Typical oil density references."]
+  },
+  {
+    "slug": "coconut-oil-melted",
+    "name": "Coconut oil (melted)",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "melted",
+    "variants": [{"key": "melted", "label": "Melted", "density_g_ml": 0.91}],
+    "notes": "Melted coconut oil is slightly less dense than solid.",
+    "sources": ["Typical oil density references."]
+  },
+  {
+    "slug": "avocado-oil",
+    "name": "Avocado oil",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.91}],
+    "notes": "Similar density to olive oil.",
+    "sources": ["Typical oil density references."]
+  },
+  {
+    "slug": "sesame-oil",
+    "name": "Sesame oil",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.92}],
+    "notes": "Toasted sesame oil is slightly denser than light oils.",
+    "sources": ["Typical oil density references."]
+  },
+  {
+    "slug": "peanut-oil",
+    "name": "Peanut oil",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.92}],
+    "notes": "Similar density to other neutral oils.",
+    "sources": ["Typical oil density references."]
+  },
+  {
+    "slug": "shortening",
+    "name": "Shortening",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Solid", "density_g_ml": 0.90}],
+    "notes": "Solid fat with air pockets; spoon lightly.",
+    "sources": ["Typical fat density references."]
+  },
+  {
+    "slug": "lard",
+    "name": "Lard",
+    "synonyms": [],
+    "category": "oils-fats",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Solid", "density_g_ml": 0.92}],
+    "notes": "Rendered pork fat; density varies with temperature.",
+    "sources": ["Typical fat density references."]
+  },
+
+  {
+    "slug": "honey",
+    "name": "Honey",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.42}],
+    "notes": "Crystallization and temperature affect density.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "maple-syrup",
+    "name": "Maple syrup",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Pure", "density_g_ml": 1.32}],
+    "notes": "Grade and temperature change weight slightly.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "agave-syrup",
+    "name": "Agave syrup",
+    "synonyms": ["agave nectar"],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.35}],
+    "notes": "Viscous syrup with density similar to honey.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "molasses",
+    "name": "Molasses",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dark", "density_g_ml": 1.40}],
+    "notes": "Thick syrup with high mineral content.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "corn-syrup",
+    "name": "Corn syrup",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Light", "density_g_ml": 1.33}],
+    "notes": "Viscous syrup; weighs more than water.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "golden-syrup",
+    "name": "Golden syrup",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.36}],
+    "notes": "Thick inverted syrup; density similar to honey.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "simple-syrup",
+    "name": "Simple syrup",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "1:1", "density_g_ml": 1.23}],
+    "notes": "Sugar dissolved in water; density depends on ratio.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "powdered-honey",
+    "name": "Powdered honey",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Powder", "density_g_ml": 0.60}],
+    "notes": "Dehydrated honey powder; packs like fine sugar.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "date-syrup",
+    "name": "Date syrup",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.35}],
+    "notes": "Viscous fruit syrup; weigh similarly to agave.",
+    "sources": ["Typical sweetener density references."]
+  },
+  {
+    "slug": "brown-rice-syrup",
+    "name": "Brown rice syrup",
+    "synonyms": [],
+    "category": "sweeteners",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.40}],
+    "notes": "Thick syrup with higher density than most liquid sweeteners.",
+    "sources": ["Typical sweetener density references."]
+  },
+
+  {
+    "slug": "white-rice-long-grain",
+    "name": "White rice (long-grain)",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.85}],
+    "notes": "Long-grain rice packs more tightly than short-grain.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "basmati-rice",
+    "name": "Basmati rice",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.78}],
+    "notes": "Long slender grains trap more air.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "jasmine-rice",
+    "name": "Jasmine rice",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.82}],
+    "notes": "Aromatic long-grain rice; density between basmati and white rice.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "brown-rice",
+    "name": "Brown rice",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.80}],
+    "notes": "Bran layer adds bulk, lowering density slightly.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "arborio-rice",
+    "name": "Arborio rice",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.86}],
+    "notes": "Short-grain rice packs tightly.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "quinoa",
+    "name": "Quinoa",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.75}],
+    "notes": "Tiny seeds settle more than oats but less than rice.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "barley",
+    "name": "Barley",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.70}],
+    "notes": "Pearled barley packs loosely.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "couscous",
+    "name": "Couscous",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.72}],
+    "notes": "Granules settle; shake-free fills are consistent.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "bulgur",
+    "name": "Bulgur",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.68}],
+    "notes": "Cracked wheat with medium particle size.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "rolled-oats",
+    "name": "Rolled oats",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Rolled", "density_g_ml": 0.35}],
+    "notes": "Flakes trap air; weigh lightly unless compacted.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "quick-oats",
+    "name": "Quick oats",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Quick", "density_g_ml": 0.40}],
+    "notes": "Smaller flakes settle more densely than rolled oats.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "steel-cut-oats",
+    "name": "Steel-cut oats",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Steel-cut", "density_g_ml": 0.45}],
+    "notes": "Coarser pieces pack more than rolled oats.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "breadcrumbs",
+    "name": "Breadcrumbs",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.35}],
+    "notes": "Breadcrumbs vary with grind and moisture.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "panko",
+    "name": "Panko",
+    "synonyms": ["panko breadcrumbs"],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Flaky", "density_g_ml": 0.25}],
+    "notes": "Large flakes trap a lot of air.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "corn-flakes-crushed",
+    "name": "Corn flakes (crushed)",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Crushed", "density_g_ml": 0.15}],
+    "notes": "Crushed flakes are very light; avoid packing.",
+    "sources": ["Typical cereal density references."]
+  },
+
+  {
+    "slug": "almonds-whole",
+    "name": "Almonds (whole)",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Whole", "density_g_ml": 0.55}],
+    "notes": "Whole nuts leave air gaps in a cup.",
+    "sources": ["Typical nut density references."]
+  },
+  {
+    "slug": "almonds-ground",
+    "name": "Almonds (ground)",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Ground", "density_g_ml": 0.40}],
+    "notes": "Ground nuts pack more tightly than whole nuts.",
+    "sources": ["Typical nut density references."]
+  },
+  {
+    "slug": "walnuts-chopped",
+    "name": "Walnuts (chopped)",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Chopped", "density_g_ml": 0.48}],
+    "notes": "Chopped nuts settle more than halves.",
+    "sources": ["Typical nut density references."]
+  },
+  {
+    "slug": "pecans-chopped",
+    "name": "Pecans (chopped)",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Chopped", "density_g_ml": 0.42}],
+    "notes": "Chopped pecans weigh less than chopped walnuts.",
+    "sources": ["Typical nut density references."]
+  },
+  {
+    "slug": "peanuts",
+    "name": "Peanuts",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Shelled", "density_g_ml": 0.60}],
+    "notes": "Whole peanuts are dense but still leave air gaps.",
+    "sources": ["Typical nut density references."]
+  },
+  {
+    "slug": "peanut-butter",
+    "name": "Peanut butter",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Creamy", "density_g_ml": 1.05}],
+    "notes": "Thick spread; stir before measuring.",
+    "sources": ["Typical nut butter density references."]
+  },
+  {
+    "slug": "sunflower-seeds",
+    "name": "Sunflower seeds",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Hulled", "density_g_ml": 0.55}],
+    "notes": "Small seeds settle into gaps more than larger nuts.",
+    "sources": ["Typical seed density references."]
+  },
+  {
+    "slug": "chia-seeds",
+    "name": "Chia seeds",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 0.68}],
+    "notes": "Tiny seeds pack densely; weigh carefully.",
+    "sources": ["Typical seed density references."]
+  },
+  {
+    "slug": "flaxseed-ground",
+    "name": "Flaxseed (ground)",
+    "synonyms": ["flax meal"],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Ground", "density_g_ml": 0.42}],
+    "notes": "Ground flax packs like a coarse flour.",
+    "sources": ["Typical seed density references."]
+  },
+  {
+    "slug": "sesame-seeds",
+    "name": "Sesame seeds",
+    "synonyms": [],
+    "category": "nuts-seeds",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Hulled", "density_g_ml": 0.60}],
+    "notes": "Small seeds settle into compact spaces.",
+    "sources": ["Typical seed density references."]
+  },
+
+  {
+    "slug": "water",
+    "name": "Water",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "~20°C", "density_g_ml": 0.998}],
+    "notes": "Density changes slightly with temperature.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "lemon-juice",
+    "name": "Lemon juice",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Fresh", "density_g_ml": 1.03}],
+    "notes": "Acid content increases density slightly over water.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "orange-juice",
+    "name": "Orange juice",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Fresh", "density_g_ml": 1.04}],
+    "notes": "Pulp and sugar content affect density.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "soy-sauce",
+    "name": "Soy sauce",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.16}],
+    "notes": "High salt content makes it heavier than water.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "vinegar",
+    "name": "Vinegar",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "5% acidity", "density_g_ml": 1.01}],
+    "notes": "Close to water in density.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "chicken-broth",
+    "name": "Chicken broth",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.01}],
+    "notes": "Salt and gelatin slightly raise density.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "vegetable-broth",
+    "name": "Vegetable broth",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.01}],
+    "notes": "Light broth behaves close to water.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "tomato-sauce",
+    "name": "Tomato sauce",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Smooth", "density_g_ml": 1.05}],
+    "notes": "Thicker than broth; adjust if very chunky.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "ketchup",
+    "name": "Ketchup",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Standard", "density_g_ml": 1.20}],
+    "notes": "Thick condiment; weighs much more per tablespoon.",
+    "sources": ["Typical liquid density references."]
+  },
+  {
+    "slug": "mustard",
+    "name": "Mustard",
+    "synonyms": [],
+    "category": "liquids",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Prepared", "density_g_ml": 1.10}],
+    "notes": "Prepared mustard density varies with water content.",
+    "sources": ["Typical liquid density references."]
+  },
+
+  {
+    "slug": "salt-table",
+    "name": "Salt (table)",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Fine", "density_g_ml": 1.20}],
+    "notes": "Fine crystals pack tightly.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "salt-kosher",
+    "name": "Salt (kosher)",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Kosher", "density_g_ml": 0.72}],
+    "notes": "Larger flakes trap more air.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "salt-sea",
+    "name": "Salt (sea)",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Sea salt", "density_g_ml": 1.10}],
+    "notes": "Crystal size varies; use weight for precision.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "black-pepper-ground",
+    "name": "Black pepper (ground)",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Ground", "density_g_ml": 0.50}],
+    "notes": "Grind size affects packing.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "cinnamon-ground",
+    "name": "Cinnamon (ground)",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Ground", "density_g_ml": 0.56}],
+    "notes": "Fine spice, packs lightly unless tapped.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "paprika",
+    "name": "Paprika",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Ground", "density_g_ml": 0.50}],
+    "notes": "Airy powder; avoid packing.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "chili-powder",
+    "name": "Chili powder",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Ground", "density_g_ml": 0.48}],
+    "notes": "Blend density depends on spices used.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "garlic-powder",
+    "name": "Garlic powder",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Fine", "density_g_ml": 0.60}],
+    "notes": "Fine granules pack more than fluffy spices.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "onion-powder",
+    "name": "Onion powder",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Fine", "density_g_ml": 0.50}],
+    "notes": "Fine powder; tap-free measuring is consistent.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "cumin-ground",
+    "name": "Cumin (ground)",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Ground", "density_g_ml": 0.55}],
+    "notes": "Aromatic spice with medium bulk density.",
+    "sources": ["Typical spice density references."]
+  },
+
+  {
+    "slug": "all-purpose-flour-sifted",
+    "name": "All-purpose flour (sifted)",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Sifted", "density_g_ml": 0.45}],
+    "notes": "Sifting aerates flour, lowering grams per cup.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "all-purpose-flour-scooped",
+    "name": "All-purpose flour (scooped)",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Scooped", "density_g_ml": 0.59}],
+    "notes": "Scooping directly from the bag compresses flour.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "bread-flour-sifted",
+    "name": "Bread flour (sifted)",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Sifted", "density_g_ml": 0.50}],
+    "notes": "Sifted bread flour is lighter than scooped bread flour.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "bread-flour-scooped",
+    "name": "Bread flour (scooped)",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Scooped", "density_g_ml": 0.62}],
+    "notes": "Scooped bread flour compresses, increasing weight per cup.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "brown-sugar-packed",
+    "name": "Brown sugar (packed)",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Packed", "density_g_ml": 0.95}],
+    "notes": "Packing removes air and increases grams per cup.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "brown-sugar-loose",
+    "name": "Brown sugar (loose)",
+    "synonyms": [],
+    "category": "baking",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Loose", "density_g_ml": 0.70}],
+    "notes": "Loose brown sugar contains more air pockets.",
+    "sources": ["Typical baking density references."]
+  },
+  {
+    "slug": "butter-solid",
+    "name": "Butter (solid)",
+    "synonyms": [],
+    "category": "dairy",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Solid", "density_g_ml": 0.96}],
+    "notes": "Solid butter holds shape and traps air between pieces.",
+    "sources": ["Typical dairy density references."]
+  },
+  {
+    "slug": "salt-kosher-diamond-crystal",
+    "name": "Salt (kosher, Diamond Crystal)",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Diamond Crystal", "density_g_ml": 0.55}],
+    "notes": "Large hollow flakes weigh less per tablespoon.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "salt-kosher-morton",
+    "name": "Salt (kosher, Morton)",
+    "synonyms": [],
+    "category": "spices",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Morton", "density_g_ml": 0.72}],
+    "notes": "Smaller flakes pack more tightly than Diamond Crystal.",
+    "sources": ["Typical spice density references."]
+  },
+  {
+    "slug": "rolled-oats-dry",
+    "name": "Rolled oats (dry)",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.35}],
+    "notes": "Dry rolled oats are lighter than soaked oats.",
+    "sources": ["Typical grain density references."]
+  },
+  {
+    "slug": "quick-oats-dry",
+    "name": "Quick oats (dry)",
+    "synonyms": [],
+    "category": "grains",
+    "defaultVariant": "default",
+    "variants": [{"key": "default", "label": "Dry", "density_g_ml": 0.40}],
+    "notes": "Dry quick oats are denser than dry rolled oats.",
+    "sources": ["Typical grain density references."]
+  }
 ]

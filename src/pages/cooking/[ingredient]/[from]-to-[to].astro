@@ -1,11 +1,12 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ingredients, cookingPairs } from "@/lib/data";
+import { chartByIngredient, guideByIngredient } from "@/lib/site-data";
 
 export const prerender = true;
 
-// Scale to 500 pages: 50 ingredients × 10 pairs
-const VOLUME_UNITS = ["tsp", "tbsp", "cup"] as const;
+// Supported conversion units
+const VOLUME_UNITS = ["tsp", "tbsp", "cup", "ml"] as const;
 const MASS_UNITS = ["g", "oz"] as const;
 type Volume = typeof VOLUME_UNITS[number];
 type Mass = typeof MASS_UNITS[number];
@@ -15,6 +16,7 @@ const ML_PER: Record<Volume, number> = {
   tsp: 4.92892159375,
   tbsp: 14.78676478125,
   cup: 236.5882365,
+  ml: 1,
 };
 
 const G_PER: Record<Exclude<Mass, "g">, number> = {
@@ -106,6 +108,8 @@ let oneUnitValue: number;
 let subtitle: string;
 let faq: Array<{ q: string; a: string }> = [];
 let relatedLinks: Array<{ label: string; href: string }> = [];
+let guideSlug: string;
+let chartSlug: string | undefined;
 
 if (!isFallback) {
   defaultVariant = ing.variants.find((v) => v.key === ing.defaultVariant) || ing.variants[0];
@@ -114,7 +118,7 @@ if (!isFallback) {
   // Build related conversions (from enabled pairs, excluding current pair)
   relatedPairs = ENABLED_PAIRS.filter(
     (p) => !(p.from === from && p.to === to)
-  ).slice(0, 6);
+  ).slice(0, 5);
 
   const commonAmounts = [0.25, 0.5, 1, 2, 3];
   conversions = commonAmounts.map((amt) => ({
@@ -138,6 +142,9 @@ if (!isFallback) {
     label: `${pair.from} → ${pair.to}`,
     href: `/cooking/${ing.slug}/${pair.from}-to-${pair.to}/`,
   }));
+
+  guideSlug = guideByIngredient[ing.slug] ?? "why-density-matters-in-cooking";
+  chartSlug = chartByIngredient[ing.slug];
 
   title = `${ing.name}: ${from} to ${to} conversion`;
   description = subtitle;
@@ -266,6 +273,17 @@ if (!isFallback) {
               <p class="mt-2 text-slate-700">{item.a}</p>
             </details>
           ))}
+        </div>
+      </section>
+
+      <section class="card card-pad mb-6 sm:mb-8">
+        <h2 class="text-lg font-bold mb-3">Helpful links</h2>
+        <div class="flex flex-wrap gap-2">
+          <a class="btn-ghost no-underline" href={`/ingredients/${ing.slug}/`}>Ingredient details</a>
+          <a class="btn-primary no-underline" href={`/guides/${guideSlug}/`}>Read guide</a>
+          {chartSlug && (
+            <a class="btn-ghost no-underline" href={`/charts/${chartSlug}/`}>Printable chart</a>
+          )}
         </div>
       </section>
 

@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ingredients from "../../data/data/ingredients.json";
+import { ingredients } from "@/lib/data";
 import type { Ingredient } from "../../types";
 import { buildTitle, buildDescription } from "../../lib/seo";
 import { getDensityRangeGPerMl } from "../../lib/density";
 import { formatNumber } from "../../lib/units";
+import { categoryGuides, chartByIngredient, guideByIngredient, variantSlugsByBase } from "@/lib/site-data";
 
 export const prerender = true;
 
@@ -21,25 +22,67 @@ if (!ingredient) throw new Error("Ingredient not found");
 const range = getDensityRangeGPerMl(ingredient);
 const title = buildTitle([ingredient.name, "conversions"]);
 const description = buildDescription(`Common conversions for ${ingredient.name}. Density varies by type and packing; see typical ranges and assumptions.`);
+
+const primaryGuide = guideByIngredient[ingredient.slug] ?? "why-density-matters-in-cooking";
+const secondaryGuide = (categoryGuides[ingredient.category] ?? ["common-cooking-measurement-mistakes"])
+  .find((g) => g !== primaryGuide) ?? "common-cooking-measurement-mistakes";
+const chartSlug = chartByIngredient[ingredient.slug];
+const variantSlugs = variantSlugsByBase[ingredient.slug] ?? [];
+const variantSlugSet = new Set(Object.values(variantSlugsByBase).flat());
+const isVariant = variantSlugSet.has(ingredient.slug);
 ---
 <BaseLayout title={title} description={description}>
-  <h1 class="text-3xl font-semibold tracking-tight">{ingredient.name}</h1>
-  <p class="mt-2 text-slate-700 max-w-2xl">{ingredient.notes}</p>
+  <section class="mb-6 sm:mb-8">
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">{ingredient.name}</h1>
+    <p class="mt-2 text-lg text-slate-700 max-w-3xl">{ingredient.notes}</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <a class="btn-primary no-underline" href={`/cooking/${ingredient.slug}/`}>View conversions</a>
+      {chartSlug && (
+        <a class="btn-ghost no-underline" href={`/charts/${chartSlug}/`}>Printable chart</a>
+      )}
+    </div>
+  </section>
 
-  <div class="mt-6 rounded-xl border p-5">
+  <section class="card card-pad mb-6 sm:mb-8">
     <div class="text-sm text-slate-600">Density range (g/mL)</div>
     <div class="mt-1 text-2xl font-semibold">
       {formatNumber(range.min, 3)} – {formatNumber(range.max, 3)}
     </div>
-    <div class="mt-3 text-sm text-slate-600">Variants</div>
+    <div class="mt-3 text-sm text-slate-600">Known variants</div>
     <ul class="mt-2 space-y-1 text-sm">
       {ingredient.variants.map(v => (
         <li><span class="font-medium">{v.label}:</span> {formatNumber(v.density_g_ml, 3)} g/mL</li>
       ))}
     </ul>
-  </div>
+  </section>
 
-  <div class="mt-6 text-sm">
+  {variantSlugs.length > 0 && (
+    <section class="card card-pad mb-6 sm:mb-8">
+      <h2 class="text-lg font-bold mb-3">Variants</h2>
+      <div class="flex flex-wrap gap-2">
+        {variantSlugs.map((v) => (
+          <a class="badge no-underline hover:bg-slate-50" href={`/ingredients/${v}/`}>{v.replace(/-/g, " ")}</a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {isVariant && (
+    <section class="card card-pad mb-6 sm:mb-8">
+      <h2 class="text-lg font-bold mb-2">Why this variant differs</h2>
+      <p class="text-slate-700">{ingredient.notes}</p>
+    </section>
+  )}
+
+  <section class="card card-pad mb-6 sm:mb-8">
+    <h2 class="text-lg font-bold mb-3">Guides</h2>
+    <div class="flex flex-wrap gap-2">
+      <a class="badge no-underline hover:bg-slate-50" href={`/guides/${primaryGuide}/`}>{primaryGuide.replace(/-/g, " ")}</a>
+      <a class="badge no-underline hover:bg-slate-50" href={`/guides/${secondaryGuide}/`}>{secondaryGuide.replace(/-/g, " ")}</a>
+    </div>
+  </section>
+
+  <div class="text-sm">
     <a class="hover:underline" href="/cooking/">Go to Cooking hub</a>
     <span class="mx-2 text-slate-300">|</span>
     <a class="hover:underline" href="/volume-weight/">Go to Volume↔Weight hub</a>

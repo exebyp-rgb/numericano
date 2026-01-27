@@ -1,0 +1,36 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const title = "Cup vs mL: US vs metric";
+const description = "Understanding cup sizes and why milliliters make conversions more reliable.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="card card-pad prose prose-slate max-w-none">
+    <h1>Cup vs mL: US vs metric</h1>
+    <p>“One cup” sounds universal, but it is not. The US cup is 236.6 mL, while the metric cup is often 250 mL. Australia uses a 250 mL cup as standard. That 5–6% difference is enough to change a recipe’s hydration or sweetness, especially when you measure multiple cups.</p>
+    <p>Milliliters are consistent. A milliliter is the same everywhere, which is why professional recipes often list weights or mL. When you rely on cups, you must also know which cup is implied. Most US recipes assume the US cup. Most international recipes assume a 250 mL cup unless stated otherwise.</p>
+    <p>Numericano uses the US cup by default because the conversion tables are tuned for common US kitchen standards. If you are using a metric cup, adjust by multiplying by 250/236.6. For example, 1 metric cup of water is 250 g, while 1 US cup of water is about 236 g. That difference looks small, but it compounds across the recipe.</p>
+    <p>For liquids, milliliters are a better choice. They eliminate the cup size ambiguity and work cleanly with density. If you need to convert from mL to grams, use the ingredient’s density. Water is straightforward, but oils and syrups are not. You can see the difference on the conversion pages for <a href="/cooking/olive-oil/ml-to-g/">olive oil</a> and <a href="/cooking/honey/ml-to-g/">honey</a>.</p>
+    <p>For dry ingredients, volume is even trickier. A cup of flour in one kitchen can be heavier than a cup of flour in another because of packing and sifting. Using grams bypasses both the cup-size issue and the packing issue. If a recipe gives only cups, convert to grams using the density for the ingredient and your measuring method.</p>
+    <p>The teaspoon and tablespoon also vary internationally. The US tablespoon is 14.8 mL, while an Australian tablespoon is 20 mL. That means a “tablespoon” can be 35% larger depending on your location. If you are following a recipe from another region, check whether it is based on US or metric measures.</p>
+    <p>If you bake often, a good rule is: weigh dry ingredients, measure liquids in milliliters, and use the recipe’s region to interpret cups. This will reduce surprises and make your results repeatable. For home cooking, you can still use cups, but do so with awareness.</p>
+    <p>Many international recipes list both cups and grams. When they do, trust the grams. It’s the most precise representation of the recipe developer’s intent. Use cups only when you lack a scale or when the ingredient is forgiving.</p>
+    <p>When you see “1 cup of milk” in a US recipe, it’s best to think “about 236 mL.” If your measuring cup is metric, aim for 236 mL rather than the full 250. That small adjustment brings the rest of the conversions back into alignment.</p>
+    <p>Numericano includes mL-to-gram conversions for this reason. With density in hand, you can keep your measurements consistent across regions and avoid confusion between cup systems.</p>
+  </section>
+
+  <section class="card card-pad mt-6">
+    <h2 class="text-lg font-bold mb-3">FAQ</h2>
+    <div class="space-y-2">
+      <details class="rounded-xl border border-slate-200 p-3">
+        <summary class="cursor-pointer font-semibold text-slate-900">Should I buy a US or metric measuring cup?</summary>
+        <p class="mt-2 text-slate-700">If you mainly cook from US recipes, use a US cup. If you cook internationally, a metric cup plus a scale will cover most recipes accurately.</p>
+      </details>
+      <details class="rounded-xl border border-slate-200 p-3">
+        <summary class="cursor-pointer font-semibold text-slate-900">Why do tablespoon measurements seem inconsistent?</summary>
+        <p class="mt-2 text-slate-700">Different countries use different tablespoon sizes. Use milliliters or grams to remove ambiguity.</p>
+      </details>
+    </div>
+  </section>
+</BaseLayout>

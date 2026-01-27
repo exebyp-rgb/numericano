@@ -1,0 +1,144 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ingredients } from "@/lib/data";
+import { chartSlugs, chartByIngredient, guideByIngredient } from "@/lib/site-data";
+import { volumeToMass, fmt } from "@/lib/convert";
+
+const chartToIngredient = Object.fromEntries(
+  Object.entries(chartByIngredient).map(([ingredient, chart]) => [chart, ingredient])
+);
+
+export async function getStaticPaths() {
+  return chartSlugs.map((slug) => ({ params: { slug }, props: { slug } }));
+}
+
+const { slug } = Astro.props;
+const ingredientSlug = chartToIngredient[slug];
+const ingredient = ingredients.find((item) => item.slug === ingredientSlug);
+
+if (!ingredient) {
+  throw new Error(`Unknown chart slug: ${slug}`);
+}
+
+const variant = ingredient.variants.find((item) => item.key === ingredient.defaultVariant) ?? ingredient.variants[0];
+const density = variant?.density_g_ml ?? 1;
+const title = `${ingredient.name} conversion chart`;
+const description = `Print-friendly ${ingredient.name} conversion chart for cups, tablespoons, teaspoons, and grams.`;
+
+const volumeRows = [
+  { label: "1 tsp", value: 1, unit: "tsp" },
+  { label: "1 tbsp", value: 1, unit: "tbsp" },
+  { label: "1/4 cup", value: 0.25, unit: "cup" },
+  { label: "1/3 cup", value: 1 / 3, unit: "cup" },
+  { label: "1/2 cup", value: 0.5, unit: "cup" },
+  { label: "2/3 cup", value: 2 / 3, unit: "cup" },
+  { label: "3/4 cup", value: 0.75, unit: "cup" },
+  { label: "1 cup", value: 1, unit: "cup" },
+];
+
+const ML_PER = {
+  tsp: 4.92892159375,
+  tbsp: 14.78676478125,
+  cup: 236.5882365,
+};
+
+function massToVolume(g: number, unit: "tsp" | "tbsp" | "cup") {
+  const ml = g / density;
+  return ml / ML_PER[unit];
+}
+
+const massRows = [50, 100, 200, 500];
+const guideSlug = guideByIngredient[ingredient.slug];
+const chartLinks = [
+  { label: "Cup to grams", href: `/cooking/${ingredient.slug}/cup-to-g/` },
+  { label: "Grams to cups", href: `/cooking/${ingredient.slug}/g-to-cup/` },
+  { label: "Tablespoon to grams", href: `/cooking/${ingredient.slug}/tbsp-to-g/` },
+  { label: "Teaspoon to grams", href: `/cooking/${ingredient.slug}/tsp-to-g/` },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="card card-pad">
+    <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+      <div>
+        <p class="text-sm uppercase tracking-wider text-slate-500">Conversion chart</p>
+        <h1 class="text-2xl font-bold text-slate-900">{ingredient.name} conversion chart</h1>
+        <p class="text-slate-600 mt-2">Use this chart for quick lookups. Values use the {variant.label.toLowerCase()} density.</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a class="btn btn-primary" href={`/ingredients/${ingredient.slug}/`}>Ingredient page</a>
+        {guideSlug && <a class="btn" href={`/guides/${guideSlug}/`}>Measurement guide</a>}
+      </div>
+    </div>
+  </section>
+
+  <section class="card card-pad mt-6">
+    <h2 class="text-lg font-bold text-slate-900">Volume to weight</h2>
+    <p class="text-slate-600 text-sm">Print-friendly table for common volume measures.</p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead class="text-left text-slate-500">
+          <tr>
+            <th class="py-2">Volume</th>
+            <th class="py-2">Grams</th>
+            <th class="py-2">Ounces</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-800">
+          {volumeRows.map((row) => (
+            <tr>
+              <td class="py-2 border-t border-slate-200">{row.label}</td>
+              <td class="py-2 border-t border-slate-200">
+                {fmt(volumeToMass(row.value, row.unit, density, "g"))}
+              </td>
+              <td class="py-2 border-t border-slate-200">
+                {fmt(volumeToMass(row.value, row.unit, density, "oz"))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card card-pad mt-6">
+    <h2 class="text-lg font-bold text-slate-900">Weight to volume</h2>
+    <p class="text-slate-600 text-sm">Convert grams into cups, tablespoons, and teaspoons.</p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead class="text-left text-slate-500">
+          <tr>
+            <th class="py-2">Grams</th>
+            <th class="py-2">Cups</th>
+            <th class="py-2">Tablespoons</th>
+            <th class="py-2">Teaspoons</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-800">
+          {massRows.map((g) => (
+            <tr>
+              <td class="py-2 border-t border-slate-200">{g}</td>
+              <td class="py-2 border-t border-slate-200">{fmt(massToVolume(g, "cup"))}</td>
+              <td class="py-2 border-t border-slate-200">{fmt(massToVolume(g, "tbsp"))}</td>
+              <td class="py-2 border-t border-slate-200">{fmt(massToVolume(g, "tsp"))}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card card-pad mt-6">
+    <h2 class="text-lg font-bold text-slate-900">More conversions</h2>
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 mt-3">
+      {chartLinks.map((link) => (
+        <a class="card hover:shadow-md transition" href={link.href}>
+          <div class="card-pad">
+            <p class="font-semibold text-slate-900">{link.label}</p>
+            <p class="text-sm text-slate-600">Use the calculator for exact values.</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

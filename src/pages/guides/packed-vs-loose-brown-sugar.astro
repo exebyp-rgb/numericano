@@ -1,0 +1,36 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const title = "Packed vs loose brown sugar";
+const description = "Why brown sugar packing changes weight and how to measure it consistently.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="card card-pad prose prose-slate max-w-none">
+    <h1>Packed vs loose brown sugar</h1>
+    <p>Brown sugar is sticky, moist, and full of air pockets. The way you fill the cup can change the weight by a surprising amount. A loosely filled cup can be 25% lighter than a firmly packed cup. Recipes that rely on brown sugar for texture or sweetness can swing wildly if you switch between these methods.</p>
+    <p>“Packed” means you press the sugar into the cup until it holds its shape when turned out. This is the standard assumption in most North American baking recipes. It accounts for the air that would otherwise sit between the crystals. The conversion for packed brown sugar is heavier, so if you measure loose sugar but use packed conversions, the finished bake will be less sweet and often drier.</p>
+    <p>Loose brown sugar is common when people scoop quickly or when the sugar is especially soft and clumpy. In that case, the cup contains more air and less sugar by weight. If a recipe doesn’t specify, assume packed. That is the baseline in professional recipe testing and most cookbook standards.</p>
+    <p>Use the conversion pages to see the difference: <a href="/cooking/brown-sugar/cup-to-g/">brown sugar cup to grams</a> uses the packed default, while <a href="/ingredients/brown-sugar-loose/">brown sugar (loose)</a> shows the lighter density. The difference shows up even in small measures, like tablespoons and teaspoons.</p>
+    <p>Humidity plays a role. Brown sugar dries out over time, which makes it lighter and less compressible. Adding a slice of bread or a brown sugar softener can restore moisture and make packing easier. If your brown sugar is very dry and grainy, the packed method will still yield less weight than a moist batch.</p>
+    <p>Light and dark brown sugars have different molasses content, which changes weight slightly. Dark brown sugar is denser and heavier per cup. If a recipe specifies light or dark, it’s best to stick to that version rather than substituting and guessing.</p>
+    <p>When scaling a recipe, measuring by weight is the simplest solution. Use grams and a scale to avoid the packed vs loose debate entirely. If you must use volume, be intentional: pack the cup every time or keep it consistently loose. Consistency matters more than any single number.</p>
+    <p>For quick checks, look at tablespoon conversions. A packed tablespoon of brown sugar is a small, reliable unit and easier to level. Use the <a href="/cooking/brown-sugar/tbsp-to-g/">tablespoon conversion</a> to scale up or down in a recipe without switching measuring style.</p>
+    <p>Brown sugar also behaves differently in the bowl. Packed sugar brings more sweetness and moisture, which affects chewiness in cookies and the spread in cakes. Loose sugar can make batters drier and reduce caramel notes. If your bake feels off, the packing method is one of the first things to check.</p>
+    <p>Numericano treats packed as the default because that’s how most recipes are tested. If you prefer the loose method, use the variant conversion pages so your numbers match your technique.</p>
+  </section>
+
+  <section class="card card-pad mt-6">
+    <h2 class="text-lg font-bold mb-3">FAQ</h2>
+    <div class="space-y-2">
+      <details class="rounded-xl border border-slate-200 p-3">
+        <summary class="cursor-pointer font-semibold text-slate-900">How hard should I pack brown sugar?</summary>
+        <p class="mt-2 text-slate-700">Press firmly enough that the sugar holds the cup’s shape when inverted. You don’t need to crush it into a brick, but it should be compact.</p>
+      </details>
+      <details class="rounded-xl border border-slate-200 p-3">
+        <summary class="cursor-pointer font-semibold text-slate-900">Can I substitute light and dark brown sugar by weight?</summary>
+        <p class="mt-2 text-slate-700">Yes, but note that dark brown sugar is slightly heavier and has more molasses. Use the chart and adjust flavor expectations if you swap.</p>
+      </details>
+    </div>
+  </section>
+</BaseLayout>

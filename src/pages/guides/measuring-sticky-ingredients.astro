@@ -1,0 +1,34 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const title = "Measuring sticky ingredients accurately";
+const description = "Tips for honey, syrup, molasses, and other sticky ingredients so your measures are consistent.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="card card-pad prose prose-slate max-w-none">
+    <h1>Measuring sticky ingredients accurately</h1>
+    <p>Honey, molasses, and syrups stick to measuring cups and spoons. That means you rarely get the full measured amount into the bowl unless you use a few tricks.</p>
+    <p>First, lightly oil the measuring cup with a neutral oil or spray. A thin coating reduces sticking and helps the ingredient slide out cleanly. This method is especially helpful for honey and maple syrup.</p>
+    <p>Second, choose weight when you can. A kitchen scale eliminates the need to scrape sticky ingredients out of a cup. Place your mixing bowl on the scale, tare it, and pour until you hit the target grams.</p>
+    <p>Temperature also matters. Warm honey flows more easily and will fill a cup more consistently. If you’re measuring by volume, warm the jar slightly in warm water for a smoother pour, but avoid overheating which can change flavor.</p>
+    <p>Numericano provides conversions for common sticky ingredients. For example, <a href="/cooking/honey/cup-to-g/">honey</a> and <a href="/cooking/maple-syrup/cup-to-g/">maple syrup</a> have different densities. Using the right conversion avoids under‑ or over‑sweetening.</p>
+    <p>Molasses is heavier than honey, and it can cling more aggressively. Weighing is the best option, but if you’re measuring by volume, grease the cup and use a flexible spatula to scrape the last bit out.</p>
+    <p>For peanut butter or tahini, which are thick and sticky, scoop and level carefully. A scale is far more reliable for these ingredients. The conversion pages for <a href="/cooking/peanut-butter/cup-to-g/">peanut butter</a> and <a href="/cooking/tahini/cup-to-g/">tahini</a> make it easy to switch between cups and grams.</p>
+    <p>Consistent measuring keeps your recipes repeatable. Sticky ingredients often dominate sweetness and moisture, so small deviations can be noticeable. If you bake frequently, weighing is worth the small setup time.</p>
+  </section>
+
+  <section class="card card-pad mt-6">
+    <h2 class="text-lg font-bold mb-3">FAQ</h2>
+    <div class="space-y-2">
+      <details class="rounded-xl border border-slate-200 p-3">
+        <summary class="cursor-pointer font-semibold text-slate-900">Does greasing the cup change the amount?</summary>
+        <p class="mt-2 text-slate-700">It doesn’t change the volume you measure, but it helps you transfer more of it into the bowl, which is what you want.</p>
+      </details>
+      <details class="rounded-xl border border-slate-200 p-3">
+        <summary class="cursor-pointer font-semibold text-slate-900">Can I melt sticky ingredients?</summary>
+        <p class="mt-2 text-slate-700">Gentle warming is fine for flow. Avoid overheating because it can change flavor or texture.</p>
+      </details>
+    </div>
+  </section>
+</BaseLayout>
