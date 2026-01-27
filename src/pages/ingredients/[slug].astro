@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { ingredients } from "@/lib/data";
+import { ingredients, cookingPairs } from "@/lib/data";
 import type { Ingredient } from "../../types";
 import { buildTitle, buildDescription } from "../../lib/seo";
 import { getDensityRangeGPerMl } from "../../lib/density";
@@ -30,6 +30,20 @@ const chartSlug = chartByIngredient[ingredient.slug];
 const variantSlugs = variantSlugsByBase[ingredient.slug] ?? [];
 const variantSlugSet = new Set(Object.values(variantSlugsByBase).flat());
 const isVariant = variantSlugSet.has(ingredient.slug);
+
+const pairSet = new Set(cookingPairs.map((p) => `${p.from}-${p.to}`));
+const desiredPairs = [
+  { from: "cup", to: "g" },
+  { from: "tbsp", to: "g" },
+  { from: "tsp", to: "g" },
+  { from: "oz", to: "g" },
+  { from: "ml", to: "g" },
+  { from: "g", to: "oz" },
+  { from: "g", to: "tbsp" },
+];
+const topConversions = desiredPairs
+  .filter((pair) => pairSet.has(`${pair.from}-${pair.to}`))
+  .slice(0, 6);
 ---
 <BaseLayout title={title} description={description}>
   <section class="mb-6 sm:mb-8">
@@ -74,17 +88,52 @@ const isVariant = variantSlugSet.has(ingredient.slug);
     </section>
   )}
 
-  <section class="card card-pad mb-6 sm:mb-8">
-    <h2 class="text-lg font-bold mb-3">Guides</h2>
-    <div class="flex flex-wrap gap-2">
-      <a class="badge no-underline hover:bg-slate-50" href={`/guides/${primaryGuide}/`}>{primaryGuide.replace(/-/g, " ")}</a>
-      <a class="badge no-underline hover:bg-slate-50" href={`/guides/${secondaryGuide}/`}>{secondaryGuide.replace(/-/g, " ")}</a>
-    </div>
+  <section class="grid gap-4 lg:grid-cols-3 mb-6 sm:mb-8">
+    <article class="card card-pad">
+      <h2 class="text-lg font-bold mb-3">Quick actions</h2>
+      <div class="flex flex-col gap-2">
+        <a class="btn-ghost no-underline" href="/ingredients/browse/">Browse all ingredients</a>
+        {chartSlug && <a class="btn-ghost no-underline" href={`/charts/${chartSlug}/`}>View chart</a>}
+        <a class="btn-primary no-underline" href={`/guides/${primaryGuide}/`}>Read guide</a>
+      </div>
+    </article>
+
+    <article class="card card-pad lg:col-span-2">
+      <h2 class="text-lg font-bold mb-3">Top conversions</h2>
+      <div class="flex flex-wrap gap-2">
+        {topConversions.map((pair) => (
+          <a class="badge no-underline hover:bg-slate-50" href={`/cooking/${ingredient.slug}/${pair.from}-to-${pair.to}/`}>
+            {pair.from} → {pair.to}
+          </a>
+        ))}
+      </div>
+    </article>
   </section>
 
-  <div class="text-sm">
-    <a class="hover:underline" href="/cooking/">Go to Cooking hub</a>
-    <span class="mx-2 text-slate-300">|</span>
-    <a class="hover:underline" href="/volume-weight/">Go to Volume↔Weight hub</a>
-  </div>
+  <section class="card card-pad">
+    <h2 class="text-lg font-bold mb-3">Learn</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      <a class="card hover:shadow-md transition" href={`/guides/${primaryGuide}/`}>
+        <div class="card-pad">
+          <p class="text-sm text-slate-600">Guide</p>
+          <p class="font-semibold text-slate-900">{primaryGuide.replace(/-/g, " ")}</p>
+        </div>
+      </a>
+      {chartSlug ? (
+        <a class="card hover:shadow-md transition" href={`/charts/${chartSlug}/`}>
+          <div class="card-pad">
+            <p class="text-sm text-slate-600">Chart</p>
+            <p class="font-semibold text-slate-900">{chartSlug.replace(/-/g, " ")}</p>
+          </div>
+        </a>
+      ) : (
+        <a class="card hover:shadow-md transition" href={`/guides/${secondaryGuide}/`}>
+          <div class="card-pad">
+            <p class="text-sm text-slate-600">Guide</p>
+            <p class="font-semibold text-slate-900">{secondaryGuide.replace(/-/g, " ")}</p>
+          </div>
+        </a>
+      )}
+    </div>
+  </section>
 </BaseLayout>

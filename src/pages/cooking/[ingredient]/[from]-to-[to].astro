@@ -118,7 +118,7 @@ if (!isFallback) {
   // Build related conversions (from enabled pairs, excluding current pair)
   relatedPairs = ENABLED_PAIRS.filter(
     (p) => !(p.from === from && p.to === to)
-  ).slice(0, 5);
+  ).slice(0, 6);
 
   const commonAmounts = [0.25, 0.5, 1, 2, 3];
   conversions = commonAmounts.map((amt) => ({
@@ -265,6 +265,15 @@ if (!isFallback) {
       </section>
 
       <section class="card card-pad mb-6 sm:mb-8">
+        <h2 class="text-lg font-bold mb-3">Related conversions</h2>
+        <div class="flex flex-wrap gap-2">
+          {relatedLinks.map((r) => (
+            <a class="badge no-underline hover:bg-slate-50" href={r.href}>{r.label}</a>
+          ))}
+        </div>
+      </section>
+
+      <section class="card card-pad mb-6 sm:mb-8">
         <h2 class="text-lg font-bold mb-3">FAQ</h2>
         <div class="space-y-2">
           {faq.map((item) => (
@@ -276,23 +285,14 @@ if (!isFallback) {
         </div>
       </section>
 
-      <section class="card card-pad mb-6 sm:mb-8">
-        <h2 class="text-lg font-bold mb-3">Helpful links</h2>
+      <section class="card card-pad">
+        <h2 class="text-lg font-bold mb-3">Learn</h2>
         <div class="flex flex-wrap gap-2">
-          <a class="btn-ghost no-underline" href={`/ingredients/${ing.slug}/`}>Ingredient details</a>
+          <a class="btn-ghost no-underline" href={`/ingredients/${ing.slug}/`}>Ingredient page</a>
           <a class="btn-primary no-underline" href={`/guides/${guideSlug}/`}>Read guide</a>
           {chartSlug && (
             <a class="btn-ghost no-underline" href={`/charts/${chartSlug}/`}>Printable chart</a>
           )}
-        </div>
-      </section>
-
-      <section class="card card-pad">
-        <h2 class="text-lg font-bold mb-3">Related conversions</h2>
-        <div class="flex flex-wrap gap-2">
-          {relatedLinks.map((r) => (
-            <a class="badge no-underline hover:bg-slate-50" href={r.href}>{r.label}</a>
-          ))}
         </div>
       </section>
     </>
