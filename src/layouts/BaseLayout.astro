@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Header from "../components/Header.astro";
 
 const { title = "Numericano", description = "Fast cooking conversions and ingredient density-based calculators." } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
@@ -17,28 +18,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).to
     <slot name="head" />
   </head>
   <body class="min-h-screen">
-    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
-      <div class="container-app">
-        <div class="flex h-14 items-center justify-between gap-3">
-          <a href="/" class="flex items-center gap-2 no-underline">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-600 text-white font-black">N</span>
-            <span class="font-extrabold tracking-tight text-slate-900">Numericano</span>
-          </a>
-
-          <nav class="hidden md:flex items-center gap-1">
-            <a class="btn-ghost no-underline" href="/cooking/">Cooking</a>
-            <a class="btn-ghost no-underline" href="/ingredients/browse/">Ingredients</a>
-            <a class="btn-ghost no-underline" href="/guides/">Guides</a>
-            <a class="btn-ghost no-underline" href="/charts/">Charts</a>
-            <a class="btn-ghost no-underline" href="/about/">About</a>
-          </nav>
-
-          <div class="flex items-center gap-2">
-            <a class="btn-primary no-underline" href="/ingredients/browse/">Find an ingredient</a>
-          </div>
-        </div>
-      </div>
-    </header>
+    <Header />
 
     <main class="container-app py-6 sm:py-8">
       <slot />

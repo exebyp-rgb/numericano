@@ -1,0 +1,56 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { guides } from "@/lib/site-data";
+
+const { slug } = Astro.props as { slug: string };
+const guide = guides.find((item) => item.slug === slug);
+
+if (!guide) {
+  throw new Error("Guide not found");
+}
+
+const relatedGuides = guide.related
+  .map((relatedSlug) => guides.find((item) => item.slug === relatedSlug))
+  .filter((item): item is typeof guides[number] => Boolean(item));
+
+const title = guide.title;
+const description = guide.description;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="card card-pad">
+    <p class="text-sm uppercase tracking-wider text-slate-500">Guides</p>
+    <h1 class="text-2xl font-bold text-slate-900">{guide.title}</h1>
+    <p class="text-slate-600 mt-2">{guide.description}</p>
+  </section>
+
+  <section class="card card-pad prose prose-slate max-w-none mt-6">
+    {guide.body.map((block) => (
+      <div set:html={block} />
+    ))}
+  </section>
+
+  <section class="card card-pad mt-6">
+    <h2 class="text-lg font-bold mb-3">Try it now</h2>
+    <div class="flex flex-wrap gap-2">
+      {guide.tryLinks.map((link) => (
+        <a class="btn-ghost no-underline" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="card card-pad mt-6">
+    <h2 class="text-lg font-bold mb-3">Related guides</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      {relatedGuides.map((related) => (
+        <a class="card hover:shadow-md transition" href={`/guides/${related.slug}/`}>
+          <div class="card-pad">
+            <p class="text-sm text-slate-600">Guide</p>
+            <p class="font-semibold text-slate-900">{related.title}</p>
+            <p class="text-sm text-slate-600 mt-2">{related.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

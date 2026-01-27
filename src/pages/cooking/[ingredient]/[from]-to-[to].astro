@@ -199,7 +199,7 @@ if (!isFallback) {
         <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div class="text-sm font-semibold text-slate-700">Calculator</div>
-            <div class="mt-1 kpi" id="result">{fmt(oneUnitValue)}</div>
+            <div class="mt-1 kpi" id="result" data-value={oneUnitValue}>{fmt(oneUnitValue)}</div>
             <div class="kpi-sub">Result in <b>{to}</b>. Assumes density and typical packing.</div>
           </div>
 
@@ -223,7 +223,7 @@ if (!isFallback) {
         <script is:inline>
           const amount = document.getElementById("amount");
           const result = document.getElementById("result");
-          const valuePer1 = Number({JSON.stringify(oneUnitValue)});
+          const valuePer1 = Number(result.dataset.value || "0");
 
           function fmt(n) {
             return n.toFixed(2).replace(/\.?0+$/, "");
