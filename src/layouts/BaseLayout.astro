@@ -1,15 +1,8 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header.astro";
-import Sidebar from "../components/Sidebar.astro";
 
-const {
-  title = "Numericano",
-  description = "Practical cooking conversions with explicit assumptions.",
-  noSidebar = false
-} = Astro.props;
-
-const year = new Date().getFullYear();
+const { title = "Numericano", description = "Fast cooking conversions and ingredient density-based calculators." } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 ---
 
 <!doctype html>
@@ -17,32 +10,47 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
     <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+    <slot name="head" />
   </head>
-  <body class="bg-white text-slate-900">
-    <a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:border-slate-300 focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:shadow-lg">Skip to content</a>
+  <body class="min-h-screen">
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
+      <div class="container-app">
+        <div class="flex h-14 items-center justify-between gap-3">
+          <a href="/" class="flex items-center gap-2 no-underline">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-600 text-white font-black">N</span>
+            <span class="font-extrabold tracking-tight text-slate-900">Numericano</span>
+          </a>
 
-    <Header />
+          <nav class="hidden md:flex items-center gap-1">
+            <a class="btn-ghost no-underline" href="/cooking/">Cooking</a>
+            <a class="btn-ghost no-underline" href="/ingredients/browse/">Ingredients</a>
+            <a class="btn-ghost no-underline" href="/about/">About</a>
+          </nav>
 
-    <main id="content" class="mx-auto w-full max-w-6xl px-4 py-8">
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
-        <section class="prose prose-slate max-w-none">
-          <slot />
-        </section>
-        {!noSidebar && (
-          <div>
-            <Sidebar />
+          <div class="flex items-center gap-2">
+            <a class="btn-primary no-underline" href="/ingredients/browse/">Find an ingredient</a>
           </div>
-        )}
+        </div>
       </div>
+    </header>
+
+    <main class="container-app py-6 sm:py-8">
+      <slot />
     </main>
 
-    <footer class="border-t border-slate-200">
-      <div class="mx-auto max-w-6xl px-4 py-6 text-sm text-slate-600">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <span>Numericano prioritizes clarity: each conversion is tied to an explicit assumption (density, packing, temperature).</span>
-          <span>© {year} Numericano</span>
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="container-app py-8 text-sm text-slate-600">
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Numericano</p>
+          <div class="flex gap-4">
+            <a href="/about/" class="no-underline">About</a>
+            <a href="/ingredients/browse/" class="no-underline">Ingredients</a>
+            <a href="/cooking/" class="no-underline">Conversions</a>
+          </div>
         </div>
       </div>
     </footer>

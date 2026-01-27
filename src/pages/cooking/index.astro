@@ -1,60 +1,77 @@
 ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ingredients, cookingPairs } from "@/lib/data";
 
-type Ingredient = { slug: string; name: string };
+type Ingredient = { slug: string; name: string; notes?: string };
 type Pair = { from: string; to: string };
 
 const ING = ingredients as Ingredient[];
 const PAIRS = cookingPairs as Pair[];
 
-const builtIngs = ING;
-const builtPairs = PAIRS;
-
-// Find some popular conversions that actually exist
-const popularPairs = builtPairs.slice(0, 3); // tsp->tbsp, tsp->cup, tsp->g
+const popularPairs = PAIRS.slice(0, 3);
+const title = "Cooking conversions";
+const description = "Ingredient-based cooking conversions with explicit density assumptions.";
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cooking conversions (cups/tbsp/tsp to grams/ounces) — Numericano</title>
-    <meta name="description" content="Ingredient-based cooking conversions with explicit density assumptions." />
-    <link rel="canonical" href="/cooking/" />
-  </head>
-  <body>
-    <p><a href="/">Numericano</a></p>
-    <h1>Cooking conversions</h1>
-    <p>Select an ingredient and a conversion pair.</p>
 
-    <h2>Browse All Ingredients</h2>
-    <p><a href="/ingredients/">View all ingredients</a></p>
+<BaseLayout title={title} description={description}>
+  <section class="mb-6 sm:mb-8">
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Cooking conversions</h1>
+    <p class="mt-2 text-lg text-slate-700">Select an ingredient and a conversion pair.</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <a class="btn-ghost no-underline" href="/ingredients/browse/">Browse all ingredients</a>
+      <a class="btn-primary no-underline" href="/ingredients/browse/">Find an ingredient</a>
+    </div>
+  </section>
 
-    <h2>Ingredients with Conversions</h2>
-    <ul>
-      {builtIngs.map(i => (
-        <li><a href={`/cooking/${i.slug}/`}>{i.name}</a></li>
+  <section class="mb-6 sm:mb-8">
+    <div class="flex items-center justify-between gap-3 mb-3">
+      <h2 class="text-lg font-bold">Ingredients with conversions</h2>
+      <span class="text-sm text-slate-600">{ING.length} ingredients</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {ING.map((i) => (
+        <article class="card card-pad">
+          <h3 class="text-base font-semibold text-slate-900">{i.name}</h3>
+          <p class="mt-1 text-sm text-slate-600">Browse unit conversions for {i.name.toLowerCase()}.</p>
+          <div class="mt-3 flex gap-2">
+            <a class="btn-primary no-underline" href={`/cooking/${i.slug}/`}>Open conversions</a>
+          </div>
+        </article>
       ))}
-    </ul>
+    </div>
+  </section>
 
-    <h2>Popular conversions</h2>
-    <ul>
-      {builtIngs.slice(0, 10).map(i => (
-        <li>
-          {popularPairs.map((pair, idx) => (
-            <>
-              {idx > 0 && " · "}
-              <a href={`/cooking/${i.slug}/${pair.from}-to-${pair.to}/`}>
-                1 {pair.from} {i.name} in {pair.to}
+  <section class="mb-6 sm:mb-8">
+    <div class="flex items-center justify-between gap-3 mb-3">
+      <h2 class="text-lg font-bold">Popular conversions</h2>
+      <span class="text-sm text-slate-600">Quick jumps</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {ING.slice(0, 9).map((i) => (
+        <article class="card card-pad">
+          <h3 class="text-base font-semibold text-slate-900">{i.name}</h3>
+          <p class="mt-1 text-sm text-slate-600">Common conversions for {i.name.toLowerCase()}.</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {popularPairs.map((pair) => (
+              <a class="badge no-underline hover:bg-slate-50" href={`/cooking/${i.slug}/${pair.from}-to-${pair.to}/`}>
+                1 {pair.from} → {pair.to}
               </a>
-            </>
-          ))}
-        </li>
+            ))}
+          </div>
+        </article>
       ))}
-    </ul>
+    </div>
+  </section>
 
-    <h2>All available conversion pairs</h2>
-    <ul>
-      {builtPairs.map(p => <li>{p.from} → {p.to}</li>)}
-    </ul>
-  </body>
-</html>
+  <section class="card card-pad">
+    <div class="flex items-center justify-between gap-3 mb-3">
+      <h2 class="text-lg font-bold">All available conversion pairs</h2>
+      <span class="text-sm text-slate-600">{PAIRS.length} pairs</span>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      {PAIRS.map((p) => (
+        <span class="badge">{p.from} → {p.to}</span>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

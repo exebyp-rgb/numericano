@@ -1,30 +1,27 @@
 ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ingredients } from "@/lib/data";
+
+const title = "Browse all ingredients";
+const description = "Complete list of all cooking ingredients with density data and conversion tools.";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Browse All Ingredients — Numericano</title>
-    <meta name="description" content="Complete list of all cooking ingredients with density data and conversion tools." />
-    <link rel="canonical" href="https://numericano.com/ingredients/browse/" />
-  </head>
-  <body>
-    <p><a href="/">Numericano</a></p>
-    <h1>Browse All Ingredients</h1>
-    <p>Select an ingredient to view density data or cooking conversions.</p>
+<BaseLayout title={title} description={description}>
+  <section class="mb-6 sm:mb-8">
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Browse all ingredients</h1>
+    <p class="mt-2 text-lg text-slate-700">Select an ingredient to view density data or cooking conversions.</p>
+  </section>
 
-    <ul>
-      {ingredients.map((ing) => (
-        <li>
-          <strong>{ing.name}</strong>
-          {" "}
-          <a href={`/ingredients/${ing.slug}/`}>Density</a>
-          {" "}
-          <a href={`/cooking/${ing.slug}/`}>Conversions</a>
-        </li>
-      ))}
-    </ul>
-  </body>
-</html>
+  <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {ingredients.map((ing) => (
+      <article class="card card-pad">
+        <h2 class="text-base font-semibold text-slate-900">{ing.name}</h2>
+        <p class="mt-1 text-sm text-slate-600">Density ranges and conversion tools.</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <a class="btn-primary no-underline" href={`/ingredients/${ing.slug}/`}>View density</a>
+          <a class="btn-ghost no-underline" href={`/cooking/${ing.slug}/`}>Conversions</a>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

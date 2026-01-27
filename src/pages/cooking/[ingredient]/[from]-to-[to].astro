@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ingredients, cookingPairs } from "@/lib/data";
-import type { Ingredient, CookingPair } from "@/lib/data";
 
 export const prerender = true;
 
@@ -103,6 +102,10 @@ let defaultVariant: any;
 let density: number;
 let relatedPairs: any[] = [];
 let conversions: any[] = [];
+let oneUnitValue: number;
+let subtitle: string;
+let faq: Array<{ q: string; a: string }> = [];
+let relatedLinks: Array<{ label: string; href: string }> = [];
 
 if (!isFallback) {
   defaultVariant = ing.variants.find((v) => v.key === ing.defaultVariant) || ing.variants[0];
@@ -119,8 +122,25 @@ if (!isFallback) {
     to: `${fmt(convert(amt, from as Unit, to as Unit, density))} ${to}`,
   }));
 
+  oneUnitValue = convert(1, from as Unit, to as Unit, density);
+  subtitle = `1 ${from} ${ing.name.toLowerCase()} ≈ ${fmt(oneUnitValue)} ${to}`;
+  faq = [
+    {
+      q: `Why does ${from} of ${ing.name} vary in ${to}?`,
+      a: `Different packing densities, temperature, and moisture content affect how much ${ing.name} weighs per volume. This converter uses the typical density of ${defaultVariant.label} (${density} g/ml), but real-world results may vary.`,
+    },
+    {
+      q: "Is this exact for every recipe?",
+      a: `This converter gives typical ${to} for ${from} of ${ing.name}, but precision depends on how the ingredient was measured and packed. For baking and other precision work, weighing ${ing.name} directly is best.`,
+    },
+  ];
+  relatedLinks = relatedPairs.map((pair) => ({
+    label: `${pair.from} → ${pair.to}`,
+    href: `/cooking/${ing.slug}/${pair.from}-to-${pair.to}/`,
+  }));
+
   title = `${ing.name}: ${from} to ${to} conversion`;
-  description = `Convert ${ing.name} from ${from} to ${to}. Density: ${density} g/ml (${defaultVariant.label}). Includes calculator and common amounts table.`;
+  description = subtitle;
   canonicalUrl = `https://numericano.com/cooking/${ingredient}/${from}-to-${to}/`;
 } else {
   title = "Conversion Not Found";
@@ -135,213 +155,128 @@ if (!isFallback) {
   
   {isFallback ? (
     <>
-      <h1>Conversion Not Found</h1>
-      <p class="text-gray-600 mb-4">
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Conversion Not Found</h1>
+      <p class="text-slate-600 mb-4">
         The conversion you're looking for is not available.
       </p>
       
-      <div class="flex gap-4">
-        <a href="/cooking/" class="text-blue-600 underline">← Back to Cooking Hub</a>
-        <a href="/ingredients/browse/" class="text-blue-600 underline">Browse All Ingredients</a>
+      <div class="flex flex-wrap gap-3">
+        <a href="/cooking/" class="btn-ghost no-underline">← Back to Cooking Hub</a>
+        <a href="/ingredients/browse/" class="btn-primary no-underline">Browse All Ingredients</a>
       </div>
     </>
   ) : (
     <>
-      <!-- Breadcrumbs -->
-      <nav class="mb-4 text-sm">
-        <a href="/">Home</a> → 
-        <a href="/cooking/">Cooking</a> → 
-        <a href={`/cooking/${ingredient}/`}>{ing.name}</a> → 
-        <span>{from} to {to}</span>
-      </nav>
-
-      <h1>{ing.name}: {from} → {to}</h1>
-      <p><strong>Variant:</strong> {defaultVariant.label} • <strong>Density:</strong> {density} g/ml</p>
-      {ing.notes && <p class="text-sm text-gray-600">{ing.notes}</p>}
-
-      <!-- Context Section -->
-      <div class="bg-blue-50 p-4 rounded mb-6 text-sm">
-        <p>
-          This conversion assumes {ing.name} with a density of {density} g/ml. Packing, settling, and temperature can affect actual weight, so results may vary slightly. For example, tightly packed {ing.name} weighs more than loosely packed. Different variants of {ing.name} have different densities and ranges—see the <a href={`/ingredients/${ing.slug}/`} class="text-blue-600 underline">{ing.name} ingredient page</a> for details.
-        </p>
+      <div class="mb-4 text-sm text-slate-600">
+        <a class="no-underline" href="/">Home</a>
+        <span class="mx-2">→</span>
+        <a class="no-underline" href="/cooking/">Cooking</a>
+        <span class="mx-2">→</span>
+        <a class="no-underline" href={`/cooking/${ingredient}/`}>{ing.name}</a>
+        <span class="mx-2">→</span>
+        <span class="text-slate-900 font-semibold">{from} to {to}</span>
       </div>
 
-      <h2>Common amounts</h2>
-      <table class="w-full border-collapse">
-        <thead>
-          <tr class="border-b">
-            <th class="text-left p-2">{from}</th>
-            <th class="text-left p-2">{to}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {conversions.map((c) => (
-            <tr class="border-b">
-              <td class="p-2">{c.from}</td>
-              <td class="p-2">{c.to}</td>
+      <section class="mb-6 sm:mb-8">
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">{ing.name}: {from} to {to}</h1>
+        <p class="mt-2 text-lg text-slate-700">{subtitle}</p>
+
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="badge">Ingredient: <b class="text-slate-900">{ing.name}</b></span>
+          <span class="badge">Density used: <b class="text-slate-900">{density} g/ml</b></span>
+          <span class="badge">Units: <b class="text-slate-900">{from} → {to}</b></span>
+        </div>
+      </section>
+
+      <section class="card card-pad mb-6 sm:mb-8">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div class="text-sm font-semibold text-slate-700">Calculator</div>
+            <div class="mt-1 kpi" id="result">{fmt(oneUnitValue)}</div>
+            <div class="kpi-sub">Result in <b>{to}</b>. Assumes density and typical packing.</div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3 sm:items-end">
+            <label class="block">
+              <div class="text-xs font-semibold text-slate-600 mb-1">Amount ({from})</div>
+              <input
+                id="amount"
+                type="number"
+                inputmode="decimal"
+                value="1"
+                min="0"
+                class="w-44 rounded-xl border-slate-200"
+              />
+            </label>
+
+            <a class="btn-ghost no-underline" href={`/cooking/${ing.slug}/`}>More conversions</a>
+          </div>
+        </div>
+
+        <script is:inline>
+          const amount = document.getElementById("amount");
+          const result = document.getElementById("result");
+          const valuePer1 = Number({JSON.stringify(oneUnitValue)});
+
+          function fmt(n) {
+            return n.toFixed(2).replace(/\.?0+$/, "");
+          }
+
+          function update() {
+            const x = Number(amount.value || 0);
+            const y = x * valuePer1;
+            result.textContent = Number.isFinite(y) ? fmt(y) : "—";
+          }
+
+          amount.addEventListener("input", update);
+          update();
+        </script>
+      </section>
+
+      <section class="card card-pad mb-6 sm:mb-8">
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <h2 class="text-lg font-bold">Quick table</h2>
+          <span class="text-sm text-slate-600">Common amounts</span>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{from}</th>
+              <th>{to}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <h2>Calculator</h2>
-      <div class="my-4">
-        <label class="block mb-2">
-          Amount in <strong>{from}</strong>:
-          <input 
-            type="number" 
-            id="inputAmt" 
-            value="1" 
-            step="0.01" 
-            class="border p-2 ml-2 rounded"
-          />
-        </label>
-        <p class="mt-2">
-          Result: <span id="result" class="font-bold"></span> {to}
-        </p>
-      </div>
-
-      <script is:inline define:vars={{ from, to, density }}>
-        const VOLUME_UNITS = ["tsp", "tbsp", "cup"];
-        const MASS_UNITS = ["g", "oz"];
-        
-        const ML_PER = {
-          tsp: 4.92892159375,
-          tbsp: 14.78676478125,
-          cup: 236.5882365,
-        };
-        
-        const G_PER = {
-          oz: 28.349523125,
-        };
-        
-        function volumeToMl(amt, unit) {
-          return amt * ML_PER[unit];
-        }
-        
-        function mlToVolume(ml, unit) {
-          return ml / ML_PER[unit];
-        }
-        
-        function massToG(amt, unit) {
-          if (unit === "g") return amt;
-          return amt * G_PER[unit];
-        }
-        
-        function gToUnit(g, unit) {
-          if (unit === "g") return g;
-          return g / G_PER[unit];
-        }
-        
-        function fmt(n) {
-          return n.toFixed(2).replace(/\.?0+$/, "");
-        }
-        
-        function convert(amt, fromUnit, toUnit, dens) {
-          const isFromVol = VOLUME_UNITS.includes(fromUnit);
-          const isToVol = VOLUME_UNITS.includes(toUnit);
-          
-          if (isFromVol && isToVol) {
-            const ml = volumeToMl(amt, fromUnit);
-            return mlToVolume(ml, toUnit);
-          }
-          
-          if (!isFromVol && !isToVol) {
-            const g = massToG(amt, fromUnit);
-            return gToUnit(g, toUnit);
-          }
-          
-          if (isFromVol && !isToVol) {
-            const ml = volumeToMl(amt, fromUnit);
-            const g = ml * dens;
-            return gToUnit(g, toUnit);
-          }
-          
-          const g = massToG(amt, fromUnit);
-          const ml = g / dens;
-          return mlToVolume(ml, toUnit);
-        }
-        
-        const input = document.getElementById("inputAmt");
-        const result = document.getElementById("result");
-        
-        function update() {
-          const amt = parseFloat(input.value) || 0;
-          const res = convert(amt, from, to, density);
-          result.textContent = fmt(res);
-        }
-        
-        input.addEventListener("input", update);
-        update();
-      </script>
-
-      <p class="mt-6 text-sm text-gray-600">
-        <a href={`/cooking/${ing.slug}/`} class="underline">All {ing.name} conversions</a> • 
-        <a href="/cooking/" class="underline">All ingredients</a>
-      </p>
-
-      {relatedPairs.length > 0 && (
-        <div class="mt-8 pt-6 border-t">
-          <h3 class="text-sm font-semibold mb-3">Related conversions for {ing.name}</h3>
-          <ul class="grid grid-cols-2 gap-2 text-sm">
-            {relatedPairs.map((pair) => (
-              <li>
-                <a 
-                  href={`/cooking/${ing.slug}/${pair.from}-to-${pair.to}/`}
-                  class="text-blue-600 hover:underline"
-                >
-                  {pair.from} → {pair.to}
-                </a>
-              </li>
+          </thead>
+          <tbody>
+            {conversions.map((c) => (
+              <tr>
+                <td>{c.from}</td>
+                <td class="font-semibold">{c.to}</td>
+              </tr>
             ))}
-          </ul>
-        </div>
-      )}
+          </tbody>
+        </table>
+      </section>
 
-      <!-- FAQ Section -->
-      <div class="mt-12 pt-6 border-t">
-        <h2>FAQ</h2>
-        
-        <div class="mt-4 mb-6">
-          <h3 class="font-semibold text-base mb-2">Why does {from} of {ing.name} vary in {to}?</h3>
-          <p class="text-sm">
-            Different packing densities, temperature, and moisture content affect how much {ing.name} weighs per volume. For example, {from} of loosely scooped {ing.name} weighs less than {from} of settled {ing.name}. This converter uses the typical density of {defaultVariant.label} ({density} g/ml), but real-world results may vary. To see the full range of densities for {ing.name}, visit the <a href={`/ingredients/${ing.slug}/`} class="text-blue-600 underline">ingredient details page</a>.
-          </p>
+      <section class="card card-pad mb-6 sm:mb-8">
+        <h2 class="text-lg font-bold mb-3">FAQ</h2>
+        <div class="space-y-2">
+          {faq.map((item) => (
+            <details class="rounded-xl border border-slate-200 p-3">
+              <summary class="cursor-pointer font-semibold text-slate-900">{item.q}</summary>
+              <p class="mt-2 text-slate-700">{item.a}</p>
+            </details>
+          ))}
         </div>
+      </section>
 
-        <div class="mb-6">
-          <h3 class="font-semibold text-base mb-2">Is this exact for every recipe?</h3>
-          <p class="text-sm">
-            This converter gives typical {to} for {from} of {ing.name}, but precision depends on how the ingredient was measured and packed. For baking and other precision work, weighing {ing.name} directly is best. Use this calculator as a guide for any amount—the conversion method stays the same regardless of quantity.
-          </p>
+      <section class="card card-pad">
+        <h2 class="text-lg font-bold mb-3">Related conversions</h2>
+        <div class="flex flex-wrap gap-2">
+          {relatedLinks.map((r) => (
+            <a class="badge no-underline hover:bg-slate-50" href={r.href}>{r.label}</a>
+          ))}
         </div>
-      </div>
-
-      <!-- JSON-LD FAQPage Schema -->
-      <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Why does {from} of {ing.name} vary in {to}?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Different packing densities, temperature, and moisture content affect how much {ing.name} weighs per volume. For example, {from} of loosely scooped {ing.name} weighs less than {from} of settled {ing.name}. This converter uses the typical density of {defaultVariant.label} ({density} g/ml), but real-world results may vary."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is this exact for every recipe?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "This converter gives typical {to} for {from} of {ing.name}, but precision depends on how the ingredient was measured and packed. For baking and other precision work, weighing {ing.name} directly is best. Use this calculator as a guide for any amount—the conversion method stays the same regardless of quantity."
-              }
-            }
-          ]
-        }
-      </script>
+      </section>
     </>
   )}
 </BaseLayout>
